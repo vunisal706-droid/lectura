@@ -23,6 +23,10 @@ textarea,input{font-family:'Nunito',sans-serif}
 ::-webkit-scrollbar{width:6px}
 ::-webkit-scrollbar-track{background:#F1F5F9}
 ::-webkit-scrollbar-thumb{background:#CBD5E1;border-radius:3px}
+:focus-visible{outline:3px solid #FF6B35;outline-offset:2px}
+@media (prefers-reduced-motion: reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}}
+@keyframes confettiFall{0%{transform:translateY(-12vh) rotate(0deg);opacity:1}90%{opacity:1}100%{transform:translateY(112vh) rotate(720deg);opacity:0}}
+.confeti{position:fixed;top:0;width:10px;height:14px;border-radius:3px;animation:confettiFall linear forwards;z-index:999;pointer-events:none}
 </style>
 </head>
 <body>
@@ -4160,6 +4164,50 @@ const cargar = () => { try { return JSON.parse(localStorage.getItem(SK)) || []; 
 const guardar = r => { try { const a = cargar(); a.push(r); localStorage.setItem(SK, JSON.stringify(a)); } catch {}};
 const borrarTodo = () => { try { localStorage.removeItem(SK); } catch {}};
 const formatFecha = iso => new Date(iso).toLocaleDateString("es-ES",{day:"2-digit",month:"2-digit",year:"numeric",hour:"2-digit",minute:"2-digit"});
+const borrarUno = id => { try { const a = cargar().filter(r => r.id !== id); localStorage.setItem(SK, JSON.stringify(a)); } catch {} };
+
+/* Nombre recordado del alumno/a */
+const NK = "lecturas_nombre";
+const cargarNombre = () => { try { return localStorage.getItem(NK) || ""; } catch { return ""; }};
+const guardarNombre = n => { try { localStorage.setItem(NK, n); } catch {}};
+
+const TODAS_LECTURAS = [...LECTURAS_1C, ...LECTURAS_2C, ...LECTURAS_3C, ...LECTURAS_PT];
+
+/* Mejor resultado de cada lectura para un alumno/a */
+const mejoresPorLectura = alumno => {
+  const m = {};
+  cargar().forEach(r => {
+    if (r.alumno !== alumno || !r.total) return;
+    const pct = Math.round(r.correctas / r.total * 100);
+    if (m[r.lecturaId] == null || pct > m[r.lecturaId]) m[r.lecturaId] = pct;
+  });
+  return m;
+};
+
+/* Lectura en voz alta (TTS es-ES) */
+const hablar = (texto, onEnd) => {
+  try {
+    if (!("speechSynthesis" in window)) return false;
+    window.speechSynthesis.cancel();
+    const u = new SpeechSynthesisUtterance(texto);
+    u.lang = "es-ES"; u.rate = 0.95;
+    const v = window.speechSynthesis.getVoices().find(v => v.lang && v.lang.startsWith("es"));
+    if (v) u.voice = v;
+    if (onEnd) { u.onend = onEnd; u.onerror = onEnd; }
+    window.speechSynthesis.speak(u);
+    return true;
+  } catch { return false; }
+};
+const callar = () => { try { window.speechSynthesis.cancel(); } catch {} };
+const hayTTS = typeof window !== "undefined" && "speechSynthesis" in window;
+
+/* Confeti de celebración */
+function Confetti({n = 70}) {
+  const colores = ["#FF6B35","#3B82F6","#22C55E","#F59E0B","#8B5CF6","#EC4899"];
+  return <>{Array.from({length: n}).map((_, i) => (
+    <div key={i} className="confeti" style={{left: Math.random()*100+"%", background: colores[i % colores.length], animationDuration: (2 + Math.random()*2)+"s", animationDelay: (Math.random()*0.9)+"s"}}/>
+  ))}</>;
+}
 
 
 const CICLOS = {
@@ -4173,9 +4221,9 @@ const CICLOS = {
    PANTALLA: INICIO
 ═══════════════════════════════════════════ */
 function PantallaInicio({onStart, onMaestro}) {
-  const [nombre, setNombre] = useState("");
+  const [nombre, setNombre] = useState(cargarNombre());
   const [error, setError] = useState(false);
-  const go = () => { if (nombre.trim().length < 2) { setError(true); return; } onStart(nombre.trim()); };
+  const go = () => { if (nombre.trim().length < 2) { setError(true); return; } guardarNombre(nombre.trim()); onStart(nombre.trim()); };
   return (
     <div className="screen" style={{background:"linear-gradient(135deg,#FFF9F0,#FEE2E2 50%,#DBEAFE)",justifyContent:"center",alignItems:"center",padding:24,gap:0}}>
       <div style={{textAlign:"center",marginBottom:32}}>
@@ -4242,6 +4290,7 @@ function PantallaSelectCiclo({alumno, onSelect, onCerrar}) {
 function PantallaBiblioteca({alumno, cicloKey, onSelect, onVolver}) {
   const ciclo = CICLOS[cicloKey];
   const niveles = [...new Set(ciclo.lecturas.map(l=>l.nivel))];
+  const mejores = mejoresPorLectura(alumno);
   const Badge = ({label,color})=>(
     <span style={{background:color+"22",color,fontSize:12,fontWeight:800,padding:"2px 8px",borderRadius:20,border:`1.5px solid ${color}44`}}>{label}</span>
   );
@@ -4274,6 +4323,7 @@ function PantallaBiblioteca({alumno, cicloKey, onSelect, onVolver}) {
                         <div style={{display:"flex",gap:5,flexWrap:"wrap"}}>
                           <Badge label={l.tipo} color={l.color}/>
                           <Badge label={`${l.preguntas.length} preguntas`} color="#64748B"/>
+                          {mejores[l.id] != null && <Badge label={mejores[l.id]===100 ? "🏆 100%" : `⭐ Mejor: ${mejores[l.id]}%`} color={mejores[l.id]===100 ? "#15803D" : "#F59E0B"}/>}
                         </div>
                       </div>
                     </div>
@@ -4292,11 +4342,18 @@ function PantallaBiblioteca({alumno, cicloKey, onSelect, onVolver}) {
    PANTALLA: TEXTO DE LECTURA
 ═══════════════════════════════════════════ */
 function PantallaLectura({lectura, onStart, onBack}) {
+  const [leyendo, setLeyendo] = useState(false);
+  useEffect(() => () => callar(), []);
+  const toggleLeer = () => {
+    if (leyendo) { callar(); setLeyendo(false); return; }
+    const ok = hablar(lectura.titulo + ". " + lectura.texto, () => setLeyendo(false));
+    if (ok) setLeyendo(true);
+  };
   return (
     <div className="screen" style={{background:"#FEF6E8"}}>
       <div style={{background:`linear-gradient(135deg,${lectura.color},${lectura.color}CC)`,padding:"20px 24px",color:"white"}}>
         <div style={{maxWidth:800,margin:"0 auto"}}>
-          <button onClick={onBack} style={{background:"rgba(255,255,255,0.2)",color:"white",padding:"6px 14px",borderRadius:10,fontSize:14,fontWeight:700,border:"2px solid rgba(255,255,255,0.4)",marginBottom:12}}>← Volver</button>
+          <button onClick={()=>{callar();onBack();}} style={{background:"rgba(255,255,255,0.2)",color:"white",padding:"8px 16px",minHeight:44,borderRadius:10,fontSize:14,fontWeight:700,border:"2px solid rgba(255,255,255,0.4)",marginBottom:12}}>← Volver</button>
           <div style={{display:"flex",alignItems:"center",gap:16}}>
             <span style={{fontSize:46}}>{lectura.icono}</span>
             <div>
@@ -4310,13 +4367,18 @@ function PantallaLectura({lectura, onStart, onBack}) {
         <p style={{maxWidth:800,margin:"0 auto",fontSize:"clamp(15px,2.5vw,18px)",fontWeight:700,color:"#1E293B",textAlign:"center"}}>💬 {lectura.intro}</p>
       </div>
       <div style={{flex:1,overflowY:"auto",padding:24}}>
+        {hayTTS && <div style={{maxWidth:800,margin:"0 auto 12px",display:"flex",justifyContent:"flex-end"}}>
+          <button onClick={toggleLeer} aria-label={leyendo ? "Detener lectura en voz alta" : "Escuchar la lectura en voz alta"} style={{padding:"10px 20px",minHeight:44,background:leyendo ? "#FEF2F2" : "white",color:leyendo ? "#DC2626" : lectura.color,fontSize:"clamp(14px,2.2vw,16px)",borderRadius:14,border:`3px solid ${leyendo ? "#FCA5A5" : lectura.color}`,fontWeight:800,boxShadow:"0 2px 10px rgba(0,0,0,0.07)"}}>
+            {leyendo ? "⏹️ Detener" : "🔊 Escuchar"}
+          </button>
+        </div>}
         <div style={{background:"white",borderRadius:20,padding:"32px",maxWidth:800,margin:"0 auto",boxShadow:"0 4px 20px rgba(0,0,0,0.07)",fontSize:"clamp(17px,2.5vw,21px)",lineHeight:1.9,color:"#1E293B",fontWeight:600,whiteSpace:"pre-line"}}>
           {lectura.texto}
         </div>
       </div>
       <div style={{padding:"18px 24px",background:"white",boxShadow:"0 -4px 20px rgba(0,0,0,0.06)"}}>
         <div style={{maxWidth:800,margin:"0 auto"}}>
-          <button onClick={onStart} style={{width:"100%",padding:18,background:`linear-gradient(135deg,${lectura.color},${lectura.color}CC)`,color:"white",fontSize:"clamp(17px,2.8vw,21px)",borderRadius:16,boxShadow:`0 4px 16px ${lectura.color}44`}}>
+          <button onClick={()=>{callar();onStart();}} style={{width:"100%",padding:18,background:`linear-gradient(135deg,${lectura.color},${lectura.color}CC)`,color:"white",fontSize:"clamp(17px,2.8vw,21px)",borderRadius:16,boxShadow:`0 4px 16px ${lectura.color}44`}}>
             ¡Responder las preguntas! ✏️
           </button>
         </div>
@@ -4334,9 +4396,19 @@ function PantallaPreguntas({lectura, alumno, cicloKey, onFinish}) {
   const [textos, setTextos] = useState(Array(lectura.preguntas.length).fill(""));
   const [feedback, setFeedback] = useState(null);
   const [anim, setAnim] = useState("");
+  const [leyendoP, setLeyendoP] = useState(false);
   const p = lectura.preguntas[idx];
   const esUltima = idx === lectura.preguntas.length - 1;
   const respActual = respuestas[idx];
+  useEffect(() => { callar(); setLeyendoP(false); window.scrollTo({top:0}); }, [idx]);
+  useEffect(() => () => callar(), []);
+  const leerPregunta = () => {
+    if (leyendoP) { callar(); setLeyendoP(false); return; }
+    let t = p.pregunta;
+    if (p.tipo === "opcion") t += ". " + p.opciones.map((o,i) => ["A","B","C","D"][i] + ": " + o).join(". ");
+    const ok = hablar(t, () => setLeyendoP(false));
+    if (ok) setLeyendoP(true);
+  };
 
   const responder = i => {
     if (feedback !== null) return;
@@ -4372,7 +4444,10 @@ function PantallaPreguntas({lectura, alumno, cicloKey, onFinish}) {
       <div style={{flex:1,overflowY:"auto",padding:24}}>
         <div style={{maxWidth:700,margin:"0 auto"}}>
           <div style={{background:"white",borderRadius:20,padding:"24px 28px",boxShadow:"0 4px 20px rgba(0,0,0,0.08)",marginBottom:18}}>
-            <div style={{display:"inline-block",background:lectura.color,color:"white",fontFamily:"'Fredoka One',cursive",fontSize:17,padding:"3px 14px",borderRadius:20,marginBottom:12}}>Pregunta {idx+1}</div>
+            <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:12,gap:10}}>
+              <div style={{display:"inline-block",background:lectura.color,color:"white",fontFamily:"'Fredoka One',cursive",fontSize:17,padding:"3px 14px",borderRadius:20}}>Pregunta {idx+1}</div>
+              {hayTTS && <button onClick={leerPregunta} aria-label={leyendoP ? "Detener lectura de la pregunta" : "Escuchar la pregunta en voz alta"} style={{width:44,height:44,borderRadius:12,background:leyendoP ? "#FEF2F2" : lectura.colorLight,border:`2px solid ${leyendoP ? "#FCA5A5" : lectura.color+"66"}`,fontSize:19,flexShrink:0}}>{leyendoP ? "⏹️" : "🔊"}</button>}
+            </div>
             <p style={{fontSize:"clamp(18px,3vw,22px)",fontWeight:800,color:"#1E293B",lineHeight:1.5}}>{p.pregunta}</p>
           </div>
           {p.tipo==="opcion" && (
@@ -4424,14 +4499,14 @@ function PantallaPreguntas({lectura, alumno, cicloKey, onFinish}) {
    PANTALLA: RESULTADOS
 ═══════════════════════════════════════════ */
 function PantallaResultados({resultado, onRepeat, onBiblioteca}) {
-  const todas = [...LECTURAS_1C,...LECTURAS_3C];
-  const lectura = todas.find(l=>l.id===resultado.lecturaId);
+  const lectura = TODAS_LECTURAS.find(l=>l.id===resultado.lecturaId);
   const pct = resultado.total>0 ? Math.round((resultado.correctas/resultado.total)*100):0;
   const msg = pct===100?{e:"🏆",t:"¡Perfecto! ¡Todo correcto!",c:"#15803D"}:pct>=75?{e:"🌟",t:"¡Muy bien! ¡Casi todo!",c:"#0369A1"}:pct>=50?{e:"👍",t:"¡Bien! Puedes mejorar.",c:"#92400E"}:{e:"💪",t:"¡Sigue practicando!",c:"#DC2626"};
   return (
     <div className="screen" style={{background:"#FEF6E8"}}>
+      {pct >= 75 && resultado.total > 0 && <Confetti n={pct === 100 ? 90 : 55}/>}
       <div style={{flex:1,overflowY:"auto",padding:24,display:"flex",flexDirection:"column",alignItems:"center",gap:20}}>
-        <div style={{background:"white",borderRadius:24,padding:32,boxShadow:"0 8px 32px rgba(0,0,0,0.10)",textAlign:"center",maxWidth:600,width:"100%"}}>
+        <div style={{background:"white",borderRadius:24,padding:32,boxShadow:"0 8px 32px rgba(0,0,0,0.10)",textAlign:"center",maxWidth:600,width:"100%"}} className="pop">
           <div style={{fontSize:60,marginBottom:8}}>{msg.e}</div>
           <h2 style={{fontFamily:"'Fredoka One',cursive",fontSize:"clamp(20px,4vw,32px)",color:msg.c,marginBottom:8}}>{msg.t}</h2>
           <p style={{fontSize:"clamp(15px,2vw,18px)",color:"#64748B",fontWeight:700}}>{resultado.alumno} · {resultado.lecturaTitulo}</p>
@@ -4492,7 +4567,23 @@ function PanelMaestro({onBack}) {
   const [cicloFiltro, setCicloFiltro] = useState("todos");
   const [expandido, setExpandido] = useState(null);
   const [confirmar, setConfirmar] = useState(false);
+  const [borrandoId, setBorrandoId] = useState(null);
   const borrar = () => { borrarTodo(); setResultados([]); setConfirmar(false); };
+  const borrarRegistro = id => { borrarUno(id); setResultados(cargar()); setBorrandoId(null); setExpandido(null); };
+  const exportarCSV = () => {
+    const esc = v => '"' + String(v ?? "").replace(/"/g, '""') + '"';
+    const filas = [["Fecha","Alumno/a","Ciclo","Lectura","Correctas","Total test","Nota (0-10)","Respuestas abiertas"].join(";")];
+    ordenados.forEach(r => {
+      const nota = r.total > 0 ? Math.round(r.correctas / r.total * 100) / 10 : "";
+      const abiertas = (r.textosAbiertos || []).filter(t => t && t.trim()).join(" | ");
+      filas.push([esc(formatFecha(r.fecha)), esc(r.alumno), esc(CICLOS[r.ciclo]?.label || r.ciclo || ""), esc(r.lecturaTitulo), r.correctas, r.total, String(nota).replace(".", ","), esc(abiertas)].join(";"));
+    });
+    const blob = new Blob(["\uFEFF" + filas.join("\r\n")], {type: "text/csv;charset=utf-8"});
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = "resultados_lecturas_" + new Date().toISOString().slice(0,10) + ".csv";
+    a.click(); setTimeout(() => URL.revokeObjectURL(a.href), 2000);
+  };
   const ordenados = [...resultados].sort((a,b)=>new Date(b.fecha)-new Date(a.fecha));
   const filtrados = ordenados.filter(r=>{
     const matchNombre = !filtro || r.alumno.toLowerCase().includes(filtro.toLowerCase());
@@ -4505,11 +4596,11 @@ function PanelMaestro({onBack}) {
 
   return (
     <div className="screen" style={{background:"#F8FAFC"}}>
-      <div style={{background:"linear-gradient(135deg,#1E293B,#334155)",padding:"20px 24px",color:"white"}}>
+      <div style={{background:"linear-gradient(135deg,#2563EB,#60A5FA)",padding:"20px 24px",color:"white"}}>
         <div style={{maxWidth:900,margin:"0 auto"}}>
-          <button onClick={onBack} style={{background:"rgba(255,255,255,0.15)",color:"white",padding:"6px 14px",borderRadius:10,fontSize:14,fontWeight:700,border:"2px solid rgba(255,255,255,0.3)",marginBottom:12}}>← Inicio</button>
+          <button onClick={onBack} style={{background:"rgba(255,255,255,0.2)",color:"white",padding:"8px 16px",minHeight:44,borderRadius:10,fontSize:14,fontWeight:700,border:"2px solid rgba(255,255,255,0.4)",marginBottom:12}}>← Inicio</button>
           <h1 style={{fontFamily:"'Fredoka One',cursive",fontSize:"clamp(22px,4vw,32px)"}}>🧑‍🏫 Panel del Maestro/a</h1>
-          <p style={{fontSize:14,opacity:.75,marginTop:4}}>{resultados.length} registros · {alumnos.length} alumnos/as</p>
+          <p style={{fontSize:14,opacity:.9,marginTop:4}}>{resultados.length} registros · {alumnos.length} alumnos/as</p>
         </div>
       </div>
       <div style={{flex:1,overflowY:"auto",padding:24}}>
@@ -4534,6 +4625,7 @@ function PanelMaestro({onBack}) {
               <option value="3C">Tercer Ciclo</option>
               <option value="PT">Apoyo PT</option>
             </select>
+            <button onClick={exportarCSV} disabled={resultados.length===0} style={{padding:"9px 18px",background:resultados.length===0?"#F1F5F9":"#EFF6FF",color:resultados.length===0?"#94A3B8":"#1D4ED8",borderRadius:10,fontSize:14,fontWeight:800,border:`2px solid ${resultados.length===0?"#E2E8F0":"#93C5FD"}`,cursor:resultados.length===0?"not-allowed":"pointer"}}>📥 Exportar CSV</button>
             {!confirmar ? <button onClick={()=>setConfirmar(true)} style={{padding:"9px 18px",background:"#FEF2F2",color:"#DC2626",borderRadius:10,fontSize:14,fontWeight:800,border:"2px solid #FCA5A5"}}>🗑️ Borrar todo</button>
             : <div style={{display:"flex",gap:8}}>
                 <button onClick={borrar} style={{padding:"9px 14px",background:"#EF4444",color:"white",borderRadius:10,fontSize:14,fontWeight:800,border:"none"}}>Confirmar</button>
@@ -4549,8 +4641,7 @@ function PanelMaestro({onBack}) {
           ) : (
             <div style={{display:"flex",flexDirection:"column",gap:8}}>
               {filtrados.map(r=>{
-                const todas=[...LECTURAS_1C,...LECTURAS_2C,...LECTURAS_3C,...LECTURAS_PT];
-                const lect=todas.find(l=>l.id===r.lecturaId);
+                const lect=TODAS_LECTURAS.find(l=>l.id===r.lecturaId);
                 const pct=r.total>0?Math.round((r.correctas/r.total)*100):null;
                 const abiertas=r.textosAbiertos?.filter(t=>t&&t.trim()).length||0;
                 const ciclo=CICLOS[r.ciclo];
@@ -4583,6 +4674,16 @@ function PanelMaestro({onBack}) {
                             </div>
                           );
                         })}
+                        <div style={{display:"flex",justifyContent:"flex-end",marginTop:8}}>
+                          {borrandoId===r.id ? (
+                            <div style={{display:"flex",gap:8}}>
+                              <button onClick={()=>borrarRegistro(r.id)} style={{padding:"8px 14px",background:"#EF4444",color:"white",borderRadius:10,fontSize:13,fontWeight:800,border:"none"}}>Sí, eliminar</button>
+                              <button onClick={()=>setBorrandoId(null)} style={{padding:"8px 14px",background:"#E2E8F0",color:"#64748B",borderRadius:10,fontSize:13,fontWeight:800,border:"none"}}>Cancelar</button>
+                            </div>
+                          ) : (
+                            <button onClick={()=>setBorrandoId(r.id)} style={{padding:"8px 14px",background:"#FEF2F2",color:"#DC2626",borderRadius:10,fontSize:13,fontWeight:800,border:"2px solid #FCA5A5"}}>🗑️ Eliminar este registro</button>
+                          )}
+                        </div>
                       </div>
                     )}
                   </div>

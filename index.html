@@ -35,7 +35,306 @@ textarea,input{font-family:'Nunito',sans-serif}
 const {useState,useEffect} = React;
 
 const LECTURAS_1C = [
-  {id:1,titulo:"El asno y el hielo",nivel:"1º",tipo:"Cuento",icono:"🐴",color:"#3B82F6",colorLight:"#DBEAFE",
+  {id:1001,titulo:"Mi mamá",nivel:"1º·N1",tipo:"Cuento",icono:"👩",color:"#3B82F6",colorLight:"#DBEAFE",
+   intro:"Lee despacito. Letras nuevas: m · p",
+   texto:`Mi mamá.
+Mi papá.
+Mamá me mima.
+Papá me mima.
+¡Mi mamá y mi papá!`,
+   preguntas:[
+     {tipo:"opcion",pregunta:"¿Quién me mima?",opciones:["👨‍👩 Mamá y papá", "🐶 El perro", "👵 La abuela"],correcta:0},
+     {tipo:"opcion",pregunta:"¿Qué hace mamá?",opciones:["🤗 Me mima", "🍳 Cocina", "😴 Duerme"],correcta:0},
+     {tipo:"opcion",pregunta:"¿Quién sale en la lectura?",opciones:["👨‍👩 Mamá y papá", "🦁 Un león", "🧑‍🚀 Un astronauta"],correcta:0},
+   ]},
+  {id:1002,titulo:"Pepe y Lola",nivel:"1º·N1",tipo:"Cuento",icono:"🍋",color:"#F59E0B",colorLight:"#FEF3C7",
+   intro:"Lee despacito. Letras nuevas: l",
+   texto:`Pepe ama a Lola.
+Lola ama a Pepe.
+Lola pela la lima.
+Pepe lame la lima.
+¡Uy, mala lima!`,
+   preguntas:[
+     {tipo:"opcion",pregunta:"¿Qué pela Lola?",opciones:["🍋 La lima", "🍌 Un plátano", "🥔 Una papa"],correcta:0},
+     {tipo:"opcion",pregunta:"¿Quién lame la lima?",opciones:["👦 Pepe", "👧 Lola", "🐶 Un perro"],correcta:0},
+     {tipo:"opcion",pregunta:"¿Cómo está la lima?",opciones:["😖 Mala", "😋 Muy rica", "🥶 Muy fría"],correcta:0},
+   ]},
+  {id:1003,titulo:"Susi y su oso",nivel:"1º·N1",tipo:"Cuento",icono:"🧸",color:"#22C55E",colorLight:"#DCFCE7",
+   intro:"Lee despacito. Letras nuevas: s",
+   texto:`Susi ama a su oso.
+Susi pasea a su oso.
+Mamá pasa la sopa.
+Susi y su oso, a la mesa.
+¡Mmm, sopa!`,
+   preguntas:[
+     {tipo:"opcion",pregunta:"¿Qué ama Susi?",opciones:["🧸 Su oso", "⚽ Su pelota", "🐱 Su gata"],correcta:0},
+     {tipo:"opcion",pregunta:"¿Qué pasa mamá?",opciones:["🍲 La sopa", "🍕 La pizza", "🥛 La leche"],correcta:0},
+     {tipo:"opcion",pregunta:"¿A dónde van Susi y su oso?",opciones:["🍽️ A la mesa", "🛏️ A la cama", "🏞️ Al parque"],correcta:0},
+   ]},
+  {id:1004,titulo:"La pelota de Tito",nivel:"1º·N1",tipo:"Cuento",icono:"⚽",color:"#EC4899",colorLight:"#FCE7F3",
+   intro:"Lee despacito. Letras nuevas: t",
+   texto:`Tito tapa la pelota.
+Tito pasa la pelota a Tita.
+Tita patea la pelota.
+Tita mete la pelota.
+¡Toma, Tito!`,
+   preguntas:[
+     {tipo:"opcion",pregunta:"¿Quién mete la pelota?",opciones:["👧 Tita", "👦 Tito", "🐶 Un perro"],correcta:0},
+     {tipo:"opcion",pregunta:"¿Qué tapa Tito?",opciones:["⚽ La pelota", "🎁 Una caja", "🚪 La puerta"],correcta:0},
+     {tipo:"opcion",pregunta:"¿A qué juegan?",opciones:["⚽ Al fútbol", "🏊 A nadar", "🎨 A pintar"],correcta:0},
+   ]},
+  {id:1005,titulo:"El dado",nivel:"1º·N1",tipo:"Cuento",icono:"🎲",color:"#8B5CF6",colorLight:"#EDE9FE",
+   intro:"Lee despacito. Letras nuevas: d",
+   texto:`Dami toma el dado.
+Dami lo pasa a papá.
+Papá lo pasa a mamá.
+Mamá lo pasa a Dida.
+Dida tapa el dado.`,
+   preguntas:[
+     {tipo:"opcion",pregunta:"¿Qué toma Dami?",opciones:["🎲 El dado", "⚽ La pelota", "📕 Un libro"],correcta:0},
+     {tipo:"opcion",pregunta:"¿A quién pasa Dami el dado?",opciones:["👨 A papá", "👩 A mamá", "👧 A Dida"],correcta:0},
+     {tipo:"opcion",pregunta:"¿Quién tapa el dado?",opciones:["👧 Dida", "👨 Papá", "👦 Dami"],correcta:0},
+   ]},
+  {id:1006,titulo:"El mono Nino",nivel:"1º·N1",tipo:"Cuento",icono:"🐵",color:"#0EA5E9",colorLight:"#E0F2FE",
+   intro:"Lee despacito. Letras nuevas: n",
+   texto:`Nina pasea a su mono Nino.
+Nino toma una pelota.
+Nino la pone en la mesa.
+¡Nino, no!
+Nina mima a Nino.`,
+   preguntas:[
+     {tipo:"opcion",pregunta:"¿Cómo se llama el mono?",opciones:["🐵 Nino", "🐵 Toto", "🐵 Lolo"],correcta:0},
+     {tipo:"opcion",pregunta:"¿Dónde pone Nino la pelota?",opciones:["🍽️ En la mesa", "🛏️ En la cama", "🌳 En un árbol"],correcta:0},
+     {tipo:"opcion",pregunta:"¿Qué hace Nina al final?",opciones:["🤗 Mima a Nino", "😠 Se enfada", "😴 Se duerme"],correcta:0},
+   ]},
+  {id:1007,titulo:"La foto",nivel:"1º·N1",tipo:"Cuento",icono:"📷",color:"#3B82F6",colorLight:"#DBEAFE",
+   intro:"Lee despacito. Letras nuevas: f",
+   texto:`Felipe toma una foto.
+Fina posa en el sofá.
+La foto sale fea.
+Fina se tapa.
+Felipe la mima.
+¡Fina, no es nada!`,
+   preguntas:[
+     {tipo:"opcion",pregunta:"¿Qué toma Felipe?",opciones:["📷 Una foto", "🍎 Una fruta", "🎈 Un globo"],correcta:0},
+     {tipo:"opcion",pregunta:"¿Dónde posa Fina?",opciones:["🛋️ En el sofá", "🛏️ En la cama", "🌳 En el parque"],correcta:0},
+     {tipo:"opcion",pregunta:"¿Cómo sale la foto?",opciones:["😖 Fea", "😍 Muy bonita", "🌈 De colores"],correcta:0},
+   ]},
+  {id:1008,titulo:"Lorito",nivel:"1º·N1",tipo:"Cuento",icono:"🦜",color:"#F59E0B",colorLight:"#FEF3C7",
+   intro:"Lee despacito. Letras nuevas: r (pera, loro)",
+   texto:`Sara tiene un loro.
+Su loro es Lorito.
+Lorito mira a Sara.
+Sara le da una pera.
+Lorito pela la pera.
+¡Pera, pera!`,
+   preguntas:[
+     {tipo:"opcion",pregunta:"¿Qué animal tiene Sara?",opciones:["🦜 Un loro", "🐱 Un gato", "🐟 Un pez"],correcta:0},
+     {tipo:"opcion",pregunta:"¿Qué le da Sara a Lorito?",opciones:["🍐 Una pera", "🍌 Un plátano", "🍪 Una galleta"],correcta:0},
+     {tipo:"opcion",pregunta:"¿Cómo se llama el loro?",opciones:["🦜 Lorito", "🦜 Pepito", "🦜 Tito"],correcta:0},
+   ]},
+  {id:1009,titulo:"La cama de Coco",nivel:"1º·N1",tipo:"Cuento",icono:"🦆",color:"#22C55E",colorLight:"#DCFCE7",
+   intro:"Lee despacito. Letras nuevas: ca · co · cu",
+   texto:`Coco es un pato.
+Coco tiene una casa.
+La casa tiene una cama.
+Coco come sopa.
+Coco se mete en la cama.
+Coco se tapa.
+¡A la cama, Coco!`,
+   preguntas:[
+     {tipo:"opcion",pregunta:"¿Qué animal es Coco?",opciones:["🦆 Un pato", "🐔 Una gallina", "🐸 Una rana"],correcta:0},
+     {tipo:"opcion",pregunta:"¿Qué come Coco?",opciones:["🍲 Sopa", "🍕 Pizza", "🍦 Helado"],correcta:0},
+     {tipo:"opcion",pregunta:"¿Qué hace Coco al final?",opciones:["🛏️ Se mete en la cama", "🛁 Se baña", "⚽ Juega"],correcta:0},
+   ]},
+  {id:1010,titulo:"El bebé Beto",nivel:"1º·N1",tipo:"Cuento",icono:"👶",color:"#EC4899",colorLight:"#FCE7F3",
+   intro:"Lee despacito. Letras nuevas: b",
+   texto:`Beto es un bebé.
+Beto bebe su bibe.
+Beto tira la pelota.
+La pelota bota y bota.
+¡Beto, a la cuna!`,
+   preguntas:[
+     {tipo:"opcion",pregunta:"¿Quién es Beto?",opciones:["👶 Un bebé", "👴 Un abuelo", "🐶 Un perro"],correcta:0},
+     {tipo:"opcion",pregunta:"¿Qué tira Beto?",opciones:["⚽ La pelota", "🧸 Un osito", "🥄 Una cuchara"],correcta:0},
+     {tipo:"opcion",pregunta:"¿Qué hace la pelota?",opciones:["⬆️ Bota y bota", "🕊️ Vuela", "💥 Se rompe"],correcta:0},
+   ]},
+  {id:1011,titulo:"La vaca Vivi",nivel:"1º·N1",tipo:"Cuento",icono:"🐄",color:"#8B5CF6",colorLight:"#EDE9FE",
+   intro:"Lee despacito. Letras nuevas: v",
+   texto:`Vivi es una vaca.
+Vivi vive en una loma.
+Vivi mira a la luna.
+La luna mira a Vivi.
+¡Muuu!`,
+   preguntas:[
+     {tipo:"opcion",pregunta:"¿Qué animal es Vivi?",opciones:["🐄 Una vaca", "🐑 Una oveja", "🐴 Un caballo"],correcta:0},
+     {tipo:"opcion",pregunta:"¿Dónde vive Vivi?",opciones:["⛰️ En una loma", "🌊 En el mar", "🏙️ En la ciudad"],correcta:0},
+     {tipo:"opcion",pregunta:"¿A quién mira Vivi?",opciones:["🌙 A la luna", "☀️ Al sol", "⭐ A una estrella"],correcta:0},
+   ]},
+  {id:1012,titulo:"La piña de Toño",nivel:"1º·N1",tipo:"Cuento",icono:"🍍",color:"#0EA5E9",colorLight:"#E0F2FE",
+   intro:"Lee despacito. Letras nuevas: ñ",
+   texto:`Toño es un niño.
+Toño tiene una piña.
+Toño pela la piña.
+Una araña mira a Toño.
+¡Araña, la piña es de Toño!
+La araña se va.
+Toño come la piña.`,
+   preguntas:[
+     {tipo:"opcion",pregunta:"¿Qué tiene Toño?",opciones:["🍍 Una piña", "🍉 Una sandía", "🍎 Una manzana"],correcta:0},
+     {tipo:"opcion",pregunta:"¿Quién mira a Toño?",opciones:["🕷️ Una araña", "🐱 Un gato", "🐦 Un pájaro"],correcta:0},
+     {tipo:"opcion",pregunta:"¿Qué hace la araña al final?",opciones:["👋 Se va", "🍍 Come la piña", "🕸️ Hace una tela"],correcta:0},
+   ]},
+  {id:2001,titulo:"El perro Rufo",nivel:"1º·N2",tipo:"Cuento",icono:"🐶",color:"#3B82F6",colorLight:"#DBEAFE",
+   intro:"Nuevo: r · rr",
+   texto:`Rufo es un perro.
+Es marrón y pequeño.
+Rufo corre por el parque.
+Corre detrás de una rana.
+La rana salta al río.
+Rufo se para en la orilla.
+¡Adiós, rana!`,
+   preguntas:[
+     {tipo:"opcion",pregunta:"¿Qué animal es Rufo?",opciones:["🐶 Un perro", "🐱 Un gato", "🐰 Un conejo"],correcta:0},
+     {tipo:"opcion",pregunta:"¿De qué color es Rufo?",opciones:["🟤 Marrón", "⚪ Blanco", "⚫ Negro"],correcta:0},
+     {tipo:"opcion",pregunta:"¿Detrás de quién corre Rufo?",opciones:["🐸 De una rana", "🦆 De un pato", "🐿️ De una ardilla"],correcta:0},
+     {tipo:"opcion",pregunta:"¿Dónde salta la rana?",opciones:["🏞️ Al río", "🌳 A un árbol", "🏠 A la casa"],correcta:0},
+   ]},
+  {id:2002,titulo:"La llave de la abuela",nivel:"1º·N2",tipo:"Cuento",icono:"🔑",color:"#F59E0B",colorLight:"#FEF3C7",
+   intro:"Nuevo: ll",
+   texto:`La abuela Lola tiene una llave.
+Es una llave amarilla.
+Un día, la llave se pierde.
+Lola la busca en la silla.
+La busca en la calle.
+¡Allí está!
+La llave está en su bolsillo.`,
+   preguntas:[
+     {tipo:"opcion",pregunta:"¿Qué tiene la abuela?",opciones:["🔑 Una llave", "👓 Unas gafas", "☂️ Un paraguas"],correcta:0},
+     {tipo:"opcion",pregunta:"¿De qué color es la llave?",opciones:["🟡 Amarilla", "🔴 Roja", "🔵 Azul"],correcta:0},
+     {tipo:"opcion",pregunta:"¿Qué le pasa a la llave?",opciones:["😟 Se pierde", "💥 Se rompe", "🎁 Se la regalan"],correcta:0},
+     {tipo:"opcion",pregunta:"¿Dónde estaba la llave?",opciones:["👖 En su bolsillo", "🪑 En la silla", "🛣️ En la calle"],correcta:0},
+   ]},
+  {id:2003,titulo:"Churros con chocolate",nivel:"1º·N2",tipo:"Cuento",icono:"🍫",color:"#22C55E",colorLight:"#DCFCE7",
+   intro:"Nuevo: ch",
+   texto:`Es domingo.
+Papá hace churros.
+Los churros están calentitos.
+Mi hermana Chelo pone el chocolate.
+Mojamos los churros.
+¡Qué ricos!
+Chelo tiene la cara manchada.`,
+   preguntas:[
+     {tipo:"opcion",pregunta:"¿Qué día es?",opciones:["📅 Domingo", "📅 Lunes", "📅 Viernes"],correcta:0},
+     {tipo:"opcion",pregunta:"¿Quién hace los churros?",opciones:["👨 Papá", "👩 Mamá", "👧 Chelo"],correcta:0},
+     {tipo:"opcion",pregunta:"¿Qué pone Chelo?",opciones:["🍫 El chocolate", "🥛 La leche", "🍊 El zumo"],correcta:0},
+     {tipo:"opcion",pregunta:"¿Cómo tiene Chelo la cara?",opciones:["🤎 Manchada", "💧 Mojada", "😴 Dormida"],correcta:0},
+   ]},
+  {id:2004,titulo:"El gato Gus",nivel:"1º·N2",tipo:"Cuento",icono:"🎸",color:"#EC4899",colorLight:"#FCE7F3",
+   intro:"Nuevo: g · gue · gui",
+   texto:`Gus es un gato gordo.
+Le gusta dormir en el sofá.
+Un día ve una guitarra.
+Gus toca la guitarra con la pata.
+¡Din, don!
+Gus se asusta y salta.
+Ahora Gus solo duerme.`,
+   preguntas:[
+     {tipo:"opcion",pregunta:"¿Cómo es Gus?",opciones:["🐱 Gordo", "🐱 Muy flaco", "🐱 Muy pequeño"],correcta:0},
+     {tipo:"opcion",pregunta:"¿Dónde le gusta dormir?",opciones:["🛋️ En el sofá", "🛏️ En la cama", "📦 En una caja"],correcta:0},
+     {tipo:"opcion",pregunta:"¿Qué toca Gus?",opciones:["🎸 La guitarra", "🥁 El tambor", "🎹 El piano"],correcta:0},
+     {tipo:"opcion",pregunta:"¿Qué hace Gus al final?",opciones:["😴 Duerme", "🎸 Toca más", "🍽️ Come"],correcta:0},
+   ]},
+  {id:2005,titulo:"Juan y la jirafa",nivel:"1º·N2",tipo:"Cuento",icono:"🦒",color:"#8B5CF6",colorLight:"#EDE9FE",
+   intro:"Nuevo: j · ge · gi",
+   texto:`Juan va al zoo con su maestra.
+Ve una jirafa muy alta.
+La jirafa come hojas.
+Juan le dice: ¡Hola, jirafa!
+La jirafa baja la cabeza.
+¡Le da un beso a Juan!`,
+   preguntas:[
+     {tipo:"opcion",pregunta:"¿A dónde va Juan?",opciones:["🦁 Al zoo", "🏖️ A la playa", "🏫 Al cole"],correcta:0},
+     {tipo:"opcion",pregunta:"¿Qué animal ve?",opciones:["🦒 Una jirafa", "🐘 Un elefante", "🦓 Una cebra"],correcta:0},
+     {tipo:"opcion",pregunta:"¿Qué come la jirafa?",opciones:["🍃 Hojas", "🍌 Plátanos", "🥕 Zanahorias"],correcta:0},
+     {tipo:"opcion",pregunta:"¿Qué hace la jirafa al final?",opciones:["😘 Le da un beso", "🏃 Se va corriendo", "😴 Se duerme"],correcta:0},
+   ]},
+  {id:2006,titulo:"El zapato de Zoe",nivel:"1º·N2",tipo:"Cuento",icono:"👟",color:"#0EA5E9",colorLight:"#E0F2FE",
+   intro:"Nuevo: z · ce · ci",
+   texto:`Zoe tiene unos zapatos azules.
+Hoy va a un cumpleaños.
+Pero no encuentra un zapato.
+Busca debajo de la cama.
+Busca en la cocina.
+¡Lo tiene el perro Cero!
+Cero lo cuida en su cesta.`,
+   preguntas:[
+     {tipo:"opcion",pregunta:"¿De qué color son los zapatos?",opciones:["🔵 Azules", "🔴 Rojos", "🟢 Verdes"],correcta:0},
+     {tipo:"opcion",pregunta:"¿A dónde va Zoe?",opciones:["🎂 A un cumpleaños", "🏫 Al cole", "🏥 Al médico"],correcta:0},
+     {tipo:"opcion",pregunta:"¿Quién tiene el zapato?",opciones:["🐶 El perro Cero", "👩 Mamá", "🐱 El gato"],correcta:0},
+     {tipo:"opcion",pregunta:"¿Dónde lo guarda Cero?",opciones:["🧺 En su cesta", "🛏️ Debajo de la cama", "🍳 En la cocina"],correcta:0},
+   ]},
+  {id:2007,titulo:"El yoyó de Yago",nivel:"1º·N2",tipo:"Cuento",icono:"🪀",color:"#3B82F6",colorLight:"#DBEAFE",
+   intro:"Nuevo: y",
+   texto:`Yago tiene un yoyó.
+El yoyó sube y baja.
+Yago juega en el patio.
+Su amiga Maya quiere jugar.
+Yago le deja el yoyó.
+Maya lo hace muy bien.
+¡Ya son dos campeones!`,
+   preguntas:[
+     {tipo:"opcion",pregunta:"¿Qué juguete tiene Yago?",opciones:["🪀 Un yoyó", "⚽ Una pelota", "🪁 Una cometa"],correcta:0},
+     {tipo:"opcion",pregunta:"¿Dónde juega Yago?",opciones:["🏫 En el patio", "🏠 En su casa", "🏞️ En el río"],correcta:0},
+     {tipo:"opcion",pregunta:"¿Quién quiere jugar?",opciones:["👧 Maya", "👦 Pablo", "👵 La abuela"],correcta:0},
+     {tipo:"opcion",pregunta:"¿Qué hace Yago?",opciones:["🤝 Le deja el yoyó", "😠 Se enfada", "🏃 Se va"],correcta:0},
+   ]},
+  {id:2008,titulo:"El huevo de Hortensia",nivel:"1º·N2",tipo:"Cuento",icono:"🥚",color:"#F59E0B",colorLight:"#FEF3C7",
+   intro:"Nuevo: h",
+   texto:`La gallina Hortensia pone un huevo.
+Es un huevo muy grande.
+Hortensia lo cuida día y noche.
+Un día, el huevo hace ¡crac!
+Sale un pollito amarillo.
+¡Pío, pío!
+Hortensia está muy contenta.`,
+   preguntas:[
+     {tipo:"opcion",pregunta:"¿Cómo se llama la gallina?",opciones:["🐔 Hortensia", "🐔 Pepa", "🐔 Lola"],correcta:0},
+     {tipo:"opcion",pregunta:"¿Cómo es el huevo?",opciones:["🥚 Muy grande", "🥚 Muy pequeño", "🥚 De chocolate"],correcta:0},
+     {tipo:"opcion",pregunta:"¿Qué sale del huevo?",opciones:["🐥 Un pollito", "🐢 Una tortuga", "🐍 Una serpiente"],correcta:0},
+     {tipo:"opcion",pregunta:"¿Cómo está Hortensia?",opciones:["😊 Muy contenta", "😢 Triste", "😠 Enfadada"],correcta:0},
+   ]},
+  {id:2009,titulo:"El queso de Quique",nivel:"1º·N2",tipo:"Cuento",icono:"🧀",color:"#22C55E",colorLight:"#DCFCE7",
+   intro:"Nuevo: que · qui",
+   texto:`Quique es un ratón pequeño.
+Vive en un agujero.
+Un día huele a queso.
+Quique sale despacio.
+¡El gato está dormido!
+Quique coge el queso.
+¡Qué listo es Quique!`,
+   preguntas:[
+     {tipo:"opcion",pregunta:"¿Qué animal es Quique?",opciones:["🐭 Un ratón", "🐱 Un gato", "🐶 Un perro"],correcta:0},
+     {tipo:"opcion",pregunta:"¿Dónde vive Quique?",opciones:["🕳️ En un agujero", "🌳 En un árbol", "🏠 En una casa grande"],correcta:0},
+     {tipo:"opcion",pregunta:"¿Qué coge Quique?",opciones:["🧀 Queso", "🍎 Una manzana", "🍞 Pan"],correcta:0},
+     {tipo:"opcion",pregunta:"¿Cómo estaba el gato?",opciones:["😴 Dormido", "😺 Despierto", "🍽️ Comiendo"],correcta:0},
+   ]},
+  {id:2010,titulo:"La bruja Brígida",nivel:"1º·N2",tipo:"Cuento",icono:"🧹",color:"#EC4899",colorLight:"#FCE7F3",
+   intro:"Nuevo: br · pl (trabadas)",
+   texto:`La bruja Brígida tiene una escoba.
+La escoba vuela muy alto.
+Un día, la escoba se para.
+¡Brígida cae en un charco!
+¡Plaf!
+Brígida está mojada.
+Ahora va andando a casa.`,
+   preguntas:[
+     {tipo:"opcion",pregunta:"¿Qué tiene la bruja?",opciones:["🧹 Una escoba", "🪄 Una varita", "🐈‍⬛ Un gato"],correcta:0},
+     {tipo:"opcion",pregunta:"¿Qué hace la escoba un día?",opciones:["🛑 Se para", "🚀 Vuela más alto", "🔥 Se quema"],correcta:0},
+     {tipo:"opcion",pregunta:"¿Dónde cae Brígida?",opciones:["💦 En un charco", "🌳 En un árbol", "🏠 En un tejado"],correcta:0},
+     {tipo:"opcion",pregunta:"¿Cómo vuelve a casa?",opciones:["🚶 Andando", "🧹 Volando", "🚌 En autobús"],correcta:0},
+   ]},
+  {id:1,titulo:"El asno y el hielo",nivel:"2º",tipo:"Cuento",icono:"🐴",color:"#3B82F6",colorLight:"#DBEAFE",
    intro:"Un burro cansado decide no moverse... ¡pero está sobre un lago helado! ¿Qué pasará?",
    texto:`Era invierno, hacía mucho frío y todos los caminos estaban helados. El asno, que estaba cansado, no se encontraba con ganas para caminar hasta el establo.
 
@@ -57,7 +356,7 @@ El asno despertó al caer al agua y empezó a pedir socorro, pero nadie pudo ayu
      {tipo:"opcion",pregunta:"¿Por qué le ocurrió eso al asno?",opciones:["Porque fue caprichoso","Porque fue perezoso","Porque fue dormilón"],correcta:1},
      {tipo:"abierta",pregunta:"¿Qué hubieras hecho tú si fueras el gorrión?"},
    ]},
-  {id:2,titulo:"Sofía disimula",nivel:"1º",tipo:"Cuento",icono:"⚽",color:"#EC4899",colorLight:"#FCE7F3",
+  {id:2,titulo:"Sofía disimula",nivel:"2º",tipo:"Cuento",icono:"⚽",color:"#EC4899",colorLight:"#FCE7F3",
    intro:"A Sofía no se le da bien la gimnasia y decide inventar una excusa. ¿Lo conseguirá?",
    texto:`A Sofía no se le da muy bien la gimnasia. Los juegos de pelota son los que menos le gustan. Casi todos los niños de la clase son más altos y más fuertes que ella. Y siempre lleva las de perder.
 
@@ -83,7 +382,7 @@ Sofía está encantada de lo bien que le ha salido. Y desde entonces, a la hora 
      {tipo:"opcion",pregunta:"¿Crees que es verdad que le duele la pierna?",opciones:["Sí, le duele de verdad","No, lo inventa para no jugar","No se sabe"],correcta:1},
      {tipo:"abierta",pregunta:"¿Crees que está bien lo que ha hecho Sofía? ¿Por qué?"},
    ]},
-  {id:3,titulo:"El perrito y el hueso",nivel:"1º",tipo:"Cuento",icono:"🐶",color:"#F59E0B",colorLight:"#FEF3C7",
+  {id:3,titulo:"El perrito y el hueso",nivel:"2º",tipo:"Cuento",icono:"🐶",color:"#F59E0B",colorLight:"#FEF3C7",
    intro:"Dos perros grandes pelean por un hueso mientras el más pequeño espera su momento.",
    texto:`Érase una vez un perrito que encontró un hueso. Enseguida llegó un perro más grande, que le gruñó, le enseñó los dientes, lo miró con ojos amenazadores y le quitó el hueso. El perro grande quería comerse el hueso. Pero entonces llegó otro perro grande que también quería el hueso.
 
@@ -98,7 +397,7 @@ Entonces el perrito se metió entre los dos perros grandes, cogió el hueso y sa
      {tipo:"opcion",pregunta:"¿Quién fue más listo en esta historia?",opciones:["El primer perro grande","El segundo perro grande","El perrito pequeño"],correcta:2},
      {tipo:"opcion",pregunta:"¿Cómo hay que resolver los conflictos?",opciones:["Como quiera el más fuerte","Dialogando y con calma","Peleando hasta ganar"],correcta:1},
    ]},
-  {id:4,titulo:"El honrado leñador",nivel:"1º",tipo:"Cuento",icono:"🪓",color:"#10B981",colorLight:"#D1FAE5",
+  {id:4,titulo:"El honrado leñador",nivel:"2º",tipo:"Cuento",icono:"🪓",color:"#10B981",colorLight:"#D1FAE5",
    intro:"Un leñador pierde su herramienta en el río. ¿Será honrado cuando la ninfa le ofrezca algo mejor?",
    texto:`Había una vez un pobre leñador que regresaba a su casa después de una jornada de duro trabajo. Al cruzar un puentecillo sobre el río, se le cayó el hacha al agua. Entonces empezó a quejarse tristemente:
 —¿Cómo me ganaré el sustento ahora que no tengo hacha?
@@ -123,7 +422,7 @@ Por tercera vez la ninfa buscó bajo el agua. Al aparecer llevaba un hacha de hi
      {tipo:"opcion",pregunta:"¿Mintió el leñador?",opciones:["Sí, dijo que era suya la de oro","No, siempre dijo la verdad","A veces sí y a veces no"],correcta:1},
      {tipo:"abierta",pregunta:"¿Por qué crees que la ninfa le regaló las otras dos hachas?"},
    ]},
-  {id:5,titulo:"La señora Luna",nivel:"1º",tipo:"Poema",icono:"🌙",color:"#8B5CF6",colorLight:"#EDE9FE",
+  {id:5,titulo:"La señora Luna",nivel:"1º·N3",tipo:"Poema",icono:"🌙",color:"#8B5CF6",colorLight:"#EDE9FE",
    intro:"Un poema de Gloria Fuertes sobre la Luna que se ha puesto sus mejores galas.",
    texto:`La señora Luna
 sonríe en el cielo.
@@ -137,7 +436,7 @@ bufanda y sombrero.`,
      {tipo:"opcion",pregunta:"¿Hace frío o calor? ¿Cómo lo sabes?",opciones:["Hace frío, porque lleva bufanda","Hace calor, porque sonríe","No se puede saber"],correcta:0},
      {tipo:"opcion",pregunta:"¿Cómo es la Luna en el poema?",opciones:["Presumida","Alocada","Ordenada"],correcta:0},
    ]},
-  {id:6,titulo:"María y Sara",nivel:"1º",tipo:"Texto",icono:"🏊",color:"#06B6D4",colorLight:"#CFFAFE",
+  {id:6,titulo:"María y Sara",nivel:"1º·N3",tipo:"Texto",icono:"🏊",color:"#06B6D4",colorLight:"#CFFAFE",
    intro:"Dos amigas se reúnen cada mañana de verano a disfrutar juntas.",
    texto:`En verano María y Sara se reúnen en el río todas las mañanas. Las dos amigas nadan, corren, juegan y se ríen mucho. ¡Lo pasan de maravilla!`,
    preguntas:[
@@ -148,7 +447,7 @@ bufanda y sombrero.`,
      {tipo:"opcion",pregunta:"María y Sara son...",opciones:["Una madre y su hija","Dos amigas","Dos hermanas"],correcta:1},
      {tipo:"opcion",pregunta:"¿Cómo pasan el tiempo?",opciones:["Muy aburridas","Muy divertidas","Normal"],correcta:1},
    ]},
-  {id:7,titulo:"El tique del supermercado",nivel:"1º",tipo:"Texto funcional",icono:"🛒",color:"#84CC16",colorLight:"#ECFCCB",
+  {id:7,titulo:"El tique del supermercado",nivel:"1º·N3",tipo:"Texto funcional",icono:"🛒",color:"#84CC16",colorLight:"#ECFCCB",
    intro:"Un texto funcional diferente: el tique de compra de un supermercado. ¡Atención a todos los datos!",
    texto:`SUPERMERCADO AHORROTODO
 C/ De arriba nº 3 — Villadelprado
@@ -200,7 +499,7 @@ Ahora vivo en el campo; aquí la vida es mucho más emocionante. Nunca sé qué 
      {tipo:"opcion",pregunta:"¿Lo que más le gustaba era...?",opciones:["Comer bien","Estar cómodo","Tener amigos y ser libre"],correcta:2},
      {tipo:"abierta",pregunta:"¿Qué prefieres tú: tener muchas cosas pero estar solo, o tener amigos? ¿Por qué?"},
    ]},
-  {id:10,titulo:"El viento y el sol",nivel:"1º-2º",tipo:"Fábula",icono:"☀️",color:"#F59E0B",colorLight:"#FEF3C7",
+  {id:10,titulo:"El viento y el sol",nivel:"2º",tipo:"Fábula",icono:"☀️",color:"#F59E0B",colorLight:"#FEF3C7",
    intro:"El sol y el viento discuten: ¿quién es más fuerte? Una fábula de Esopo (600 AC).",
    texto:`El sol y el viento discutían para ver quién era el más fuerte. El viento decía:
 —¿Ves aquel anciano envuelto en una capa? Te apuesto a que le haré quitar la capa más rápido que tú.
@@ -218,7 +517,7 @@ El sol demostró entonces al viento que la suavidad y el amor de los abrazos son
      {tipo:"opcion",pregunta:"¿Cómo se sintió el viento al final?",opciones:["Derrotado","Cansado","Asustado"],correcta:0},
      {tipo:"abierta",pregunta:"¿Cuál es la enseñanza de esta fábula?"},
    ]},
-  {id:11,titulo:"Los dos amigos y el oso",nivel:"1º-2º",tipo:"Fábula",icono:"🐻",color:"#92400E",colorLight:"#FEF3C7",
+  {id:11,titulo:"Los dos amigos y el oso",nivel:"2º",tipo:"Fábula",icono:"🐻",color:"#92400E",colorLight:"#FEF3C7",
    intro:"Una fábula sobre lo que significa ser un verdadero amigo cuando hay peligro.",
    texto:`Érase una vez dos amigos que paseaban por el bosque. De pronto, apareció un oso que quería atacarlos. Uno de ellos se encaramó a un árbol y se escondió, mientras que el otro se quedó en el camino, se dejó caer al suelo y simuló que estaba muerto.
 
@@ -236,7 +535,7 @@ Cuando el oso se alejó, bajó del árbol y preguntó riendo a su compañero:
      {tipo:"opcion",pregunta:"¿Qué nos quiere enseñar esta fábula?",opciones:["Que a los amigos no se abandonan","Que el oso es un animal cariñoso","Que los niños no deben ir al bosque"],correcta:0},
      {tipo:"abierta",pregunta:"¿Qué harías tú si un amigo estuviera en peligro?"},
    ]},
-  {id:12,titulo:"El pastor mentiroso",nivel:"1º",tipo:"Cuento",icono:"🐑",color:"#059669",colorLight:"#D1FAE5",
+  {id:12,titulo:"El pastor mentiroso",nivel:"2º",tipo:"Cuento",icono:"🐑",color:"#059669",colorLight:"#D1FAE5",
    intro:"Pedro es un pastor que miente mucho. ¿Qué pasará cuando nadie le crea?",
    texto:`Pedro era un joven pastor al que le gustaba mucho decir mentiras.
 
@@ -255,7 +554,7 @@ Sin embargo, un día el lobo apareció de verdad. Pedro pidió ayuda. Y nadie le
      {tipo:"abierta",pregunta:"¿Por qué los vecinos no le hicieron caso cuando el lobo apareció de verdad?"},
      {tipo:"abierta",pregunta:"¿Has mentido alguna vez? ¿Qué pasó?"},
    ]},
-  {id:13,titulo:"El helado de chocolate",nivel:"1º",tipo:"Cuento",icono:"🍦",color:"#D97706",colorLight:"#FEF3C7",
+  {id:13,titulo:"El helado de chocolate",nivel:"1º·N3",tipo:"Cuento",icono:"🍦",color:"#D97706",colorLight:"#FEF3C7",
    intro:"A María le encantan los helados de chocolate. Pero hay cosas que no se deben exagerar.",
    texto:`A María le gustan mucho los helados y sus preferidos son los de chocolate. El otro día pasamos por una heladería y se tomó dos tarrinas de las grandes. Por la noche le dolió tanto la barriga que no le quedaron ganas de tomar más helados de chocolate.`,
    preguntas:[
@@ -291,7 +590,7 @@ Regadera se sintió muy feliz. Desde entonces trabaja en aquella ciudad y está 
      {tipo:"opcion",pregunta:"¿Qué moraleja tiene este cuento?",opciones:["Todos tenemos algo especial que nos hace útiles","Los dragones no sirven para nada","Hay que echar fuego para ser útil"],correcta:0},
      {tipo:"abierta",pregunta:"¿Qué nombre le pondrías a un dragón que echara caramelos por la boca?"},
    ]},
-  {id:15,titulo:"El colegio en el fondo del mar",nivel:"1º-2º",tipo:"Poema",icono:"🐟",color:"#0284C7",colorLight:"#E0F2FE",
+  {id:15,titulo:"El colegio en el fondo del mar",nivel:"2º",tipo:"Poema",icono:"🐟",color:"#0284C7",colorLight:"#E0F2FE",
    intro:"Un divertido poema de Gloria Fuertes sobre un colegio muy especial: ¡bajo el mar!",
    texto:`Hay un colegio
 en el fondo del mar,
@@ -331,7 +630,7 @@ dentro de un cristal.
      {tipo:"opcion",pregunta:"¿Por qué dice Gloria Fuertes «tiza de sal»?",opciones:["La tiza tiene sabor salado","La tiza y la sal son de color blanco","Para hacer tiza se necesita sal"],correcta:1},
      {tipo:"opcion",pregunta:"¿Por qué el buzo lleva su cara dentro de un cristal?",opciones:["Porque era miope","Los buzos llevan casco con cristal para respirar","Estaba en un submarino"],correcta:1},
    ]},
-  {id:16,titulo:"La mariposa y la flor",nivel:"1\u00ba",tipo:"Cuento",icono:"\ud83e\udd8b",color:"#EC4899",colorLight:"#FCE7F3",
+  {id:16,titulo:"La mariposa y la flor",nivel:"2º",tipo:"Cuento",icono:"\ud83e\udd8b",color:"#EC4899",colorLight:"#FCE7F3",
    intro:"Una mariposa busca la flor m\u00e1s bonita del jard\u00edn. \u00bfLa encontrar\u00e1?",
    texto:`Una mariposa volaba de flor en flor buscando la m\u00e1s bonita del jard\u00edn.
 
@@ -354,7 +653,7 @@ Y desde ese d\u00eda volv\u00eda siempre al girasol.`,
      {tipo:"abierta",pregunta:"\u00bfCu\u00e1l es tu flor favorita? \u00bfPor qu\u00e9?"},
      {tipo:"opcion",pregunta:"\u00bfC\u00f3mo se sinti\u00f3 la mariposa junto al girasol?",opciones:["Triste","Con calor y contenta","Asustada"],correcta:1},
    ]},
-  {id:17,titulo:"Los animales del bosque",nivel:"1\u00ba",tipo:"Texto informativo",icono:"\ud83e\udd8a",color:"#10B981",colorLight:"#D1FAE5",
+  {id:17,titulo:"Los animales del bosque",nivel:"2º",tipo:"Texto informativo",icono:"\ud83e\udd8a",color:"#10B981",colorLight:"#D1FAE5",
    intro:"Descubre qu\u00e9 animales viven en el bosque y c\u00f3mo son sus costumbres.",
    texto:`En el bosque viven muchos animales.
 
@@ -373,7 +672,7 @@ La ardilla guarda bellotas en el suelo para el invierno. A veces se olvida de d\
      {tipo:"opcion",pregunta:"\u00bfQu\u00e9 pasa cuando la ardilla olvida sus escondites?",opciones:["Se muere de hambre","Ayuda a plantar \u00e1rboles sin querer","Pide comida a otros animales"],correcta:1},
      {tipo:"abierta",pregunta:"\u00bfCu\u00e1l de estos animales del bosque te parece m\u00e1s interesante? \u00bfPor qu\u00e9?"},
    ]},
-  {id:18,titulo:"La receta de galletas",nivel:"1\u00ba",tipo:"Texto funcional",icono:"\ud83c\udf6a",color:"#D97706",colorLight:"#FEF3C7",
+  {id:18,titulo:"La receta de galletas",nivel:"2º",tipo:"Texto funcional",icono:"\ud83c\udf6a",color:"#D97706",colorLight:"#FEF3C7",
    intro:"Un texto funcional muy \u00fatil: \u00a1la receta para hacer galletas en casa!",
    texto:`GALLETAS DE MANTEQUILLA
 
@@ -400,7 +699,7 @@ Preparaci\u00f3n:
      {tipo:"opcion",pregunta:"\u00bfCu\u00e1nto tiempo se hornean?",opciones:["5 minutos","10 minutos","15 minutos"],correcta:2},
      {tipo:"abierta",pregunta:"\u00bfHas hecho alguna vez galletas o alg\u00fan otro dulce en casa? \u00bfQu\u00e9 hiciste?"},
    ]},
-  {id:19,titulo:"El osito tiene miedo",nivel:"1\u00ba",tipo:"Cuento",icono:"\ud83d\udc3b",color:"#6366F1",colorLight:"#E0E7FF",
+  {id:19,titulo:"El osito tiene miedo",nivel:"2º",tipo:"Cuento",icono:"\ud83d\udc3b",color:"#6366F1",colorLight:"#E0E7FF",
    intro:"Bruno el osito tiene miedo a la oscuridad. \u00bfQu\u00e9 pasar\u00e1 cuando se apague la luz?",
    texto:`Bruno era un osito que ten\u00eda mucho miedo a la oscuridad. Cada noche, cuando su mam\u00e1 apagaba la luz, se tapaba hasta la cabeza con la manta.
 
@@ -421,7 +720,7 @@ Desde entonces, Bruno dej\u00f3 su osito de peluche en la silla antes de dormir.
      {tipo:"opcion",pregunta:"\u00bfC\u00f3mo reaccion\u00f3 Bruno cuando descubri\u00f3 la verdad?",opciones:["Se enfad\u00f3","Se ri\u00f3","Llor\u00f3"],correcta:1},
      {tipo:"abierta",pregunta:"\u00bfTienes miedo a algo? \u00bfC\u00f3mo intentas superarlo?"},
    ]},
-  {id:20,titulo:"Las cuatro estaciones",nivel:"1\u00ba",tipo:"Texto informativo",icono:"\ud83c\udf42",color:"#F59E0B",colorLight:"#FEF3C7",
+  {id:20,titulo:"Las cuatro estaciones",nivel:"2º",tipo:"Texto informativo",icono:"\ud83c\udf42",color:"#F59E0B",colorLight:"#FEF3C7",
    intro:"\u00bfSabes qu\u00e9 cambia en cada estaci\u00f3n del a\u00f1o? \u00a1Desc\u00fabrelo aqu\u00ed!",
    texto:`El a\u00f1o tiene cuatro estaciones.
 
@@ -440,7 +739,7 @@ En invierno hace mucho fr\u00edo. En algunas zonas nieva. Los d\u00edas son cort
      {tipo:"opcion",pregunta:"\u00bfEn qu\u00e9 estaci\u00f3n los d\u00edas son m\u00e1s cortos?",opciones:["Verano","Primavera","Invierno"],correcta:2},
      {tipo:"abierta",pregunta:"\u00bfCu\u00e1l es tu estaci\u00f3n favorita del a\u00f1o? \u00bfPor qu\u00e9?"},
    ]},
-  {id:21,titulo:"El zorro y las uvas",nivel:"1\u00ba-2\u00ba",tipo:"F\u00e1bula",icono:"\ud83c\udf47",color:"#7C3AED",colorLight:"#EDE9FE",
+  {id:21,titulo:"El zorro y las uvas",nivel:"2º",tipo:"F\u00e1bula",icono:"\ud83c\udf47",color:"#7C3AED",colorLight:"#EDE9FE",
    intro:"Un zorro hambriento ve un racimo de uvas. Pero est\u00e1n muy altas... \u00bfqu\u00e9 dir\u00e1 para consolarse?",
    texto:`Un zorro estaba muy hambriento. Al pasar por un vi\u00f1edo, vio un hermoso racimo de uvas maduras que colgaba de lo alto de una parra.
 
@@ -462,7 +761,7 @@ Moraleja: Es f\u00e1cil despreciar lo que no podemos conseguir.`,
      {tipo:"opcion",pregunta:"\u00bfEra verdad lo que dijo el zorro?",opciones:["S\u00ed, las uvas estaban verdes","No, solo se consolaba de no haberlas alcanzado","No se puede saber"],correcta:1},
      {tipo:"abierta",pregunta:"\u00bfAlguna vez has dicho que algo no te importaba cuando en realidad s\u00ed te importaba? \u00bfQu\u00e9 pas\u00f3?"},
    ]},
-  {id:22,titulo:"La cigarra y la hormiga",nivel:"1\u00ba-2\u00ba",tipo:"F\u00e1bula",icono:"\ud83c\udfb8",color:"#0891B2",colorLight:"#CFFAFE",
+  {id:22,titulo:"La cigarra y la hormiga",nivel:"2º",tipo:"F\u00e1bula",icono:"\ud83c\udfb8",color:"#0891B2",colorLight:"#CFFAFE",
    intro:"La cigarra canta todo el verano mientras la hormiga trabaja. Cuando llega el invierno... \u00bfqu\u00e9 pasar\u00e1?",
    texto:`Todo el verano, la cigarra cant\u00f3 y bail\u00f3 bajo el sol, mientras la hormiga trabajaba sin parar, recogiendo comida para el invierno.
 
@@ -483,7 +782,7 @@ Pero, despu\u00e9s, se compadeci\u00f3 y le dio algo de comer. Le pidi\u00f3 sol
      {tipo:"opcion",pregunta:"\u00bfCu\u00e1l es la moraleja de esta f\u00e1bula?",opciones:["Hay que cantar mucho en verano","Hay que trabajar antes de divertirse","Las hormigas son malas"],correcta:1},
      {tipo:"abierta",pregunta:"\u00bfEres m\u00e1s parecido a la cigarra o a la hormiga? \u00bfPor qu\u00e9?"},
    ]},
-  {id:23,titulo:"El cuervo y el zorro",nivel:"1\u00ba-2\u00ba",tipo:"F\u00e1bula",icono:"\ud83d\udc26\u200d\u2b1b",color:"#1E293B",colorLight:"#F1F5F9",
+  {id:23,titulo:"El cuervo y el zorro",nivel:"2º",tipo:"F\u00e1bula",icono:"\ud83d\udc26\u200d\u2b1b",color:"#1E293B",colorLight:"#F1F5F9",
    intro:"Un cuervo tiene un trozo de queso en el pico. El zorro quiere quit\u00e1rselo con un truco.",
    texto:`Un cuervo encontr\u00f3 un trozo de queso y se pos\u00f3 en la rama de un \u00e1rbol para com\u00e9rselo.
 
@@ -506,7 +805,7 @@ Moraleja: Cuidado con los halagos de quien solo quiere aprovecharse.`,
      {tipo:"opcion",pregunta:"\u00bfQu\u00e9 nos ense\u00f1a esta f\u00e1bula?",opciones:["Que los cuervos cantan muy bien","Que hay que desconfiar de los halagos interesados","Que el queso es muy rico"],correcta:1},
      {tipo:"abierta",pregunta:"\u00bfAlguien te ha dicho alguna vez algo muy bonito para conseguir algo de ti? \u00bfQu\u00e9 pas\u00f3?"},
    ]},
-  {id:24,titulo:"El se\u00f1or \u00e1rbol",nivel:"2\u00ba",tipo:"Cuento",icono:"\ud83c\udf32",color:"#16A34A",colorLight:"#DCFCE7",
+  {id:24,titulo:"El se\u00f1or \u00e1rbol",nivel:"2º",tipo:"Cuento",icono:"\ud83c\udf32",color:"#16A34A",colorLight:"#DCFCE7",
    intro:"El viejo \u00e1rbol del parque tiene mucho que contar. \u00a1Ha visto crecer a tres generaciones!",
    texto:`En el parque del pueblo hab\u00eda un \u00e1rbol muy viejo y muy grande. Los ni\u00f1os se sentaban bajo su sombra en verano. Los p\u00e1jaros hac\u00edan sus nidos entre sus ramas. Y en oto\u00f1o, sus hojas amarillas alfombraban el suelo.
 
@@ -526,7 +825,7 @@ Y se qued\u00f3 pensando en todos los ni\u00f1os que habr\u00edan jugado bajo aq
      {tipo:"opcion",pregunta:"\u00bfQu\u00e9 hicieron los p\u00e1jaros en las ramas del \u00e1rbol?",opciones:["Cantaron todo el d\u00eda","Construyeron sus nidos","Comieron sus hojas"],correcta:1},
      {tipo:"abierta",pregunta:"Si el \u00e1rbol pudiera hablar, \u00bfqu\u00e9 crees que contar\u00eda sobre todas las cosas que ha visto?"},
    ]},
-  {id:25,titulo:"El pez arco\u00edris",nivel:"1\u00ba",tipo:"Cuento",icono:"\ud83d\udc20",color:"#06B6D4",colorLight:"#CFFAFE",
+  {id:25,titulo:"El pez arco\u00edris",nivel:"2º",tipo:"Cuento",icono:"\ud83d\udc20",color:"#06B6D4",colorLight:"#CFFAFE",
    intro:"Un pez tiene escamas de todos los colores. Pero es el m\u00e1s solitario del mar. \u00bfPor qu\u00e9?",
    texto:`En el fondo del mar viv\u00eda un pez con escamas de todos los colores: rojas, azules, verdes y doradas. Era el pez m\u00e1s bonito de todo el oc\u00e9ano.
 
@@ -547,7 +846,7 @@ Y descubri\u00f3 que eso era mucho mejor.`,
      {tipo:"opcion",pregunta:"\u00bfQu\u00e9 aprendi\u00f3 el pez al final?",opciones:["Que tener escamas bonitas es lo m\u00e1s importante","Que tener amigos es mejor que ser el m\u00e1s bonito","Que los peces peque\u00f1os son aburridos"],correcta:1},
      {tipo:"abierta",pregunta:"\u00bfCrees que es mejor ser el m\u00e1s guapo o tener buenos amigos? \u00bfPor qu\u00e9?"},
    ]},
-  {id:26,titulo:"Invitaci\u00f3n de cumplea\u00f1os",nivel:"1\u00ba",tipo:"Texto funcional",icono:"\ud83c\udf82",color:"#EC4899",colorLight:"#FCE7F3",
+  {id:26,titulo:"Invitaci\u00f3n de cumplea\u00f1os",nivel:"2º",tipo:"Texto funcional",icono:"\ud83c\udf82",color:"#EC4899",colorLight:"#FCE7F3",
    intro:"Un texto funcional muy cotidiano: una invitaci\u00f3n de cumplea\u00f1os. \u00a1Atenci\u00f3n a todos los datos!",
    texto:`\u00a1EST\u00c1S INVITADO!
 
@@ -574,7 +873,7 @@ Luc\u00eda \u2764\ufe0f`,
      {tipo:"opcion",pregunta:"\u00bfQu\u00e9 tipo de tarta habr\u00e1?",opciones:["De fresa","De vainilla","De chocolate"],correcta:2},
      {tipo:"abierta",pregunta:"\u00bfC\u00f3mo se confirma la asistencia? \u00bfY si no puedes ir, qu\u00e9 har\u00edas?"},
    ]},
-  {id:27,titulo:"El rat\u00f3n valiente",nivel:"1\u00ba",tipo:"Cuento",icono:"\ud83d\udc2d",color:"#6366F1",colorLight:"#E0E7FF",
+  {id:27,titulo:"El rat\u00f3n valiente",nivel:"2º",tipo:"Cuento",icono:"\ud83d\udc2d",color:"#6366F1",colorLight:"#E0E7FF",
    intro:"Rat\u00f3n P\u00e9rez tiene que cruzar el gran sal\u00f3n de la casa. \u00a1Y hay un gato dormido justo en medio!",
    texto:`Rat\u00f3n P\u00e9rez necesitaba cruzar el gran sal\u00f3n para llegar a la cocina. Pero justo en el centro hab\u00eda un enorme gato dormido.
 
@@ -598,7 +897,7 @@ Paso a paso, Rat\u00f3n P\u00e9rez lleg\u00f3 a la cocina. All\u00ed encontr\u00
      {tipo:"opcion",pregunta:"\u00bfQu\u00e9 aprendemos sobre el valor en este cuento?",opciones:["Los valientes no tienen miedo","El valiente es el que act\u00faa aunque tenga miedo","Hay que evitar el peligro siempre"],correcta:1},
      {tipo:"abierta",pregunta:"\u00bfRecuerdas alguna vez en que hiciste algo aunque ten\u00edas miedo? \u00bfC\u00f3mo te sentiste despu\u00e9s?"},
    ]},
-  {id:28,titulo:"El agua",nivel:"2\u00ba",tipo:"Texto informativo",icono:"\ud83d\udca7",color:"#0284C7",colorLight:"#E0F2FE",
+  {id:28,titulo:"El agua",nivel:"2º",tipo:"Texto informativo",icono:"\ud83d\udca7",color:"#0284C7",colorLight:"#E0F2FE",
    intro:"El agua es muy importante para la vida. \u00a1Descubre todo sobre ella!",
    texto:`El agua cubre casi tres cuartas partes de la Tierra. La encontramos en los mares, los r\u00edos, los lagos y en forma de hielo en los polos.
 
@@ -615,7 +914,7 @@ Debemos cuidar el agua porque es un recurso muy valioso. Podemos ahorrarla cerra
      {tipo:"opcion",pregunta:"\u00bfC\u00f3mo podemos ahorrar agua?",opciones:["Dejando el grifo abierto siempre","Ba\u00f1\u00e1ndonos m\u00e1s que ducharnos","Cerrando el grifo al lavarnos los dientes"],correcta:2},
      {tipo:"abierta",pregunta:"\u00bfQu\u00e9 otras formas de ahorrar agua se te ocurren?"},
    ]},
-  {id:29,titulo:"El monstruo de colores",nivel:"1\u00ba",tipo:"Cuento",icono:"\ud83d\udc7e",color:"#EC4899",colorLight:"#FCE7F3",
+  {id:29,titulo:"El monstruo de colores",nivel:"2º",tipo:"Cuento",icono:"\ud83d\udc7e",color:"#EC4899",colorLight:"#FCE7F3",
    intro:"El Monstruo de Colores est\u00e1 muy confundido porque tiene todos sus sentimientos mezclados. \u00bfLe ayudamos a ordenarlos?",
    texto:`El Monstruo de Colores estaba hecho un l\u00edo. Ten\u00eda todos sus sentimientos mezclados y no sab\u00eda qu\u00e9 le pasaba.
 
@@ -637,7 +936,7 @@ Cuando orden\u00f3 todos sus sentimientos, el Monstruo sonri\u00f3.
      {tipo:"opcion",pregunta:"\u00bfQu\u00e9 aprendi\u00f3 el Monstruo al final?",opciones:["Que solo la alegr\u00eda es buena","Que todos los sentimientos son importantes","Que los sentimientos dan miedo"],correcta:1},
      {tipo:"abierta",pregunta:"\u00bfDe qu\u00e9 color ser\u00eda hoy tu sentimiento? \u00bfPor qu\u00e9?"},
    ]},
-  {id:30,titulo:"El ni\u00f1o desordenado",nivel:"2\u00ba",tipo:"Cuento",icono:"\ud83e\uddf8",color:"#F59E0B",colorLight:"#FEF3C7",
+  {id:30,titulo:"El ni\u00f1o desordenado",nivel:"2º",tipo:"Cuento",icono:"\ud83e\uddf8",color:"#F59E0B",colorLight:"#FEF3C7",
    intro:"La habitaci\u00f3n de Marcos es un caos total. Un d\u00eda no encuentra nada y eso le hace pensar...",
    texto:`La habitaci\u00f3n de Marcos era un desastre. Hab\u00eda juguetes en el suelo, ropa encima de la cama y libros por todas partes.
 
@@ -661,7 +960,7 @@ Esa tarde, Marcos orden\u00f3 su habitaci\u00f3n. Le llev\u00f3 media hora. Pero
      {tipo:"opcion",pregunta:"\u00bfQu\u00e9 pas\u00f3 al d\u00eda siguiente?",opciones:["Volvi\u00f3 a perder la mochila","Sali\u00f3 al colegio en dos minutos","Lleg\u00f3 tarde al colegio"],correcta:1},
      {tipo:"abierta",pregunta:"\u00bfC\u00f3mo tienes t\u00fa tu habitaci\u00f3n? \u00bfQu\u00e9 ventajas tiene tenerla ordenada?"},
    ]},
-  {id:31,titulo:"El oto\u00f1o",nivel:"1\u00ba-2\u00ba",tipo:"Poema",icono:"\ud83c\udf41",color:"#D97706",colorLight:"#FEF9C3",
+  {id:31,titulo:"El oto\u00f1o",nivel:"2º",tipo:"Poema",icono:"\ud83c\udf41",color:"#D97706",colorLight:"#FEF9C3",
    intro:"Un poema sobre los colores, los sonidos y los sabores del oto\u00f1o.",
    texto:`Llega el oto\u00f1o
 con su capa de color,
@@ -690,7 +989,7 @@ con todo su color!`,
      {tipo:"opcion",pregunta:"\u00bfQu\u00e9 hace el viento en el poema?",opciones:["Hace mucho ruido","Juega al escondite por los rincones","Tira las hojas al suelo"],correcta:1},
      {tipo:"abierta",pregunta:"\u00bfQu\u00e9 es lo que m\u00e1s te gusta del oto\u00f1o? \u00bfPor qu\u00e9?"},
    ]},
-  {id:32,titulo:"La liebre y el erizo",nivel:"1\u00ba-2\u00ba",tipo:"F\u00e1bula",icono:"\ud83e\udd94",color:"#92400E",colorLight:"#FEF3C7",
+  {id:32,titulo:"La liebre y el erizo",nivel:"2º",tipo:"F\u00e1bula",icono:"\ud83e\udd94",color:"#92400E",colorLight:"#FEF3C7",
    intro:"La liebre se burla del erizo por sus patas cortas. El erizo decide retar a la liebre a una carrera con una trampa ingeniosa.",
    texto:`Una ma\u00f1ana, la liebre se encontr\u00f3 al erizo en el campo.
 
@@ -718,7 +1017,7 @@ Moraleja: No te burles de los dem\u00e1s. Y nunca subestimes a nadie.`,
      {tipo:"opcion",pregunta:"\u00bfQu\u00e9 nos ense\u00f1a esta f\u00e1bula?",opciones:["Que los erizos son muy listos","Que no hay que burlarse y nunca subestimes a nadie","Que la liebre es torpe"],correcta:1},
      {tipo:"abierta",pregunta:"\u00bfFue honesto el erizo con su truco? \u00bfQu\u00e9 piensas t\u00fa?"},
    ]},
-  {id:33,titulo:"El pollito P\u00edo",nivel:"1\u00ba",tipo:"Cuento",icono:"\ud83d\udc25",color:"#F59E0B",colorLight:"#FEF3C7",
+  {id:33,titulo:"El pollito P\u00edo",nivel:"2º",tipo:"Cuento",icono:"\ud83d\udc25",color:"#F59E0B",colorLight:"#FEF3C7",
    intro:"El pollito P\u00edo acaba de salir del huevo. \u00a1Todo le parece nuevo y emocionante!",
    texto:`El pollito P\u00edo sali\u00f3 del huevo un martes por la ma\u00f1ana.
 
@@ -745,7 +1044,7 @@ El mundo era precioso.`,
      {tipo:"opcion",pregunta:"\u00bfC\u00f3mo se sent\u00eda el pollito al final?",opciones:["Asustado","Muy contento","Con fr\u00edo"],correcta:1},
      {tipo:"abierta",pregunta:"Imagina que acabas de nacer y ves el mundo por primera vez. \u00bfQu\u00e9 tres cosas te sorprender\u00edan m\u00e1s?"},
    ]},
-  {id:34,titulo:"El ni\u00f1o que no quer\u00eda comer",nivel:"1\u00ba",tipo:"Cuento",icono:"\ud83e\udd66",color:"#16A34A",colorLight:"#DCFCE7",
+  {id:34,titulo:"El ni\u00f1o que no quer\u00eda comer",nivel:"2º",tipo:"Cuento",icono:"\ud83e\udd66",color:"#16A34A",colorLight:"#DCFCE7",
    intro:"A Carlos no le gustan las verduras. Pero un d\u00eda descubre algo que le hace cambiar de opini\u00f3n.",
    texto:`Carlos no quer\u00eda comer verduras. Cada vez que su mam\u00e1 pon\u00eda verduras en el plato, \u00e9l dec\u00eda:
 \u2014\u00a1Puaj! No me gustan.
@@ -770,7 +1069,7 @@ Desde ese d\u00eda, Carlos prob\u00f3 todas las verduras. Y casi todas le gustar
      {tipo:"opcion",pregunta:"\u00bfQu\u00e9 dijo la maestra sobre las cosas que uno cultiva?",opciones:["Que son m\u00e1s sanas","Que siempre saben mejor","Que son m\u00e1s baratas"],correcta:1},
      {tipo:"abierta",pregunta:"\u00bfHay alg\u00fan alimento que no te guste? \u00bfLo has probado varias veces o solo una?"},
    ]},
-  {id:35,titulo:"El lobo con piel de cordero",nivel:"2\u00ba",tipo:"F\u00e1bula",icono:"\ud83d\udc3a",color:"#1E293B",colorLight:"#F1F5F9",
+  {id:35,titulo:"El lobo con piel de cordero",nivel:"2º",tipo:"F\u00e1bula",icono:"\ud83d\udc3a",color:"#1E293B",colorLight:"#F1F5F9",
    intro:"Un lobo hambriento tiene un plan: disfrazarse de cordero para acercarse al reba\u00f1o sin que lo vean.",
    texto:`Un lobo muy hambriento encontr\u00f3 la piel de un cordero y se la puso encima.
 
@@ -791,7 +1090,7 @@ Moraleja: El que enga\u00f1a con apariencias, al final acaba pagando sus trucos.
      {tipo:"opcion",pregunta:"\u00bfCu\u00e1l es la moraleja?",opciones:["Los lobos son mal\u00edsimos","El que enga\u00f1a con apariencias acaba pagando sus trucos","Hay que tener cuidado al elegir corderos"],correcta:1},
      {tipo:"abierta",pregunta:"\u00bfPor qu\u00e9 crees que es importante no enga\u00f1ar a los dem\u00e1s?"},
    ]},
-  {id:36,titulo:"La luna llena",nivel:"1\u00ba",tipo:"Poema",icono:"\ud83c\udf15",color:"#8B5CF6",colorLight:"#EDE9FE",
+  {id:36,titulo:"La luna llena",nivel:"1º·N3",tipo:"Poema",icono:"\ud83c\udf15",color:"#8B5CF6",colorLight:"#EDE9FE",
    intro:"Un poema sobre la luna y todo lo que parece que hace por las noches mientras dormimos.",
    texto:`La luna llena
 se asoma al balc\u00f3n,
@@ -820,7 +1119,7 @@ y puedas velar.`,
      {tipo:"opcion",pregunta:"\u00bfQu\u00e9 cuida la luna seg\u00fan el \u00faltimo verso?",opciones:["Los \u00e1rboles y flores","El sue\u00f1o de los ni\u00f1os","El sol y las estrellas"],correcta:1},
      {tipo:"abierta",pregunta:"\u00bfMiras la luna a veces por la noche? \u00bfQu\u00e9 sientes cuando la ves?"},
    ]},
-  {id:37,titulo:"El beb\u00e9 tortuga",nivel:"2\u00ba",tipo:"Cuento",icono:"\ud83d\udc22",color:"#059669",colorLight:"#D1FAE5",
+  {id:37,titulo:"El beb\u00e9 tortuga",nivel:"2º",tipo:"Cuento",icono:"\ud83d\udc22",color:"#059669",colorLight:"#D1FAE5",
    intro:"Una tortuga beb\u00e9 sale del huevo en la playa y tiene que llegar sola al mar. \u00a1Es su primer gran viaje!",
    texto:`Una noche de verano, bajo la arena de una playa, un peque\u00f1o huevo se empez\u00f3 a romper. Con mucho esfuerzo, la tortuga beb\u00e9 abri\u00f3 el cascar\u00f3n.
 
@@ -843,7 +1142,7 @@ Ese viaje de pocos metros hab\u00eda sido el m\u00e1s dif\u00edcil de su vida. Y
      {tipo:"opcion",pregunta:"\u00bfC\u00f3mo se sinti\u00f3 la tortuga al llegar al agua?",opciones:["Con miedo de las olas","Que hab\u00eda llegado a casa","Cansada y triste"],correcta:1},
      {tipo:"abierta",pregunta:"\u00bfQu\u00e9 crees que es lo m\u00e1s dif\u00edcil para la tortuga en ese viaje? \u00bfPor qu\u00e9?"},
    ]},
-  {id:38,titulo:"La semilla m\u00e1gica",nivel:"2\u00ba",tipo:"Cuento",icono:"\ud83c\udf31",color:"#16A34A",colorLight:"#DCFCE7",
+  {id:38,titulo:"La semilla m\u00e1gica",nivel:"2º",tipo:"Cuento",icono:"\ud83c\udf31",color:"#16A34A",colorLight:"#DCFCE7",
    intro:"Ana recibe una semilla de su abuela. Le dice que es m\u00e1gica, pero que la magia depende de ella.",
    texto:`La abuela de Ana le regal\u00f3 una semilla marr\u00f3n y arrugada.
 
@@ -868,7 +1167,7 @@ La abuela sonri\u00f3.
      {tipo:"opcion",pregunta:"\u00bfD\u00f3nde estaba realmente la magia, seg\u00fan la abuela?",opciones:["En la semilla especial","En la tierra del jard\u00edn","En la paciencia y el esfuerzo de Ana"],correcta:2},
      {tipo:"abierta",pregunta:"\u00bfHay algo que est\u00e9s haciendo con mucha paciencia y esfuerzo? \u00bfQu\u00e9 es?"},
    ]},
-  {id:39,titulo:"Los planetas del Sistema Solar",nivel:"2\u00ba",tipo:"Texto informativo",icono:"\ud83e\ude90",color:"#1D4ED8",colorLight:"#DBEAFE",
+  {id:39,titulo:"Los planetas del Sistema Solar",nivel:"2º",tipo:"Texto informativo",icono:"\ud83e\ude90",color:"#1D4ED8",colorLight:"#DBEAFE",
    intro:"\u00bfCu\u00e1ntos planetas hay en nuestro Sistema Solar? \u00bfCu\u00e1les son sus nombres? \u00a1Desc\u00fabrelo aqu\u00ed!",
    texto:`En el Sistema Solar hay ocho planetas que giran alrededor del Sol.
 
@@ -885,7 +1184,7 @@ Para recordar el orden, podemos usar una frase: \u00abMi Vecina Tiene Muchos Jug
      {tipo:"opcion",pregunta:"\u00bfCu\u00e1ntas Tierras cabr\u00edan dentro de J\u00fapiter?",opciones:["Cien","Quinientas","Mil"],correcta:2},
      {tipo:"abierta",pregunta:"\u00bfCu\u00e1l de los planetas te parece m\u00e1s fascinante? \u00bfPor qu\u00e9?"},
    ]},
-  {id:40,titulo:"La peque\u00f1a oruga hambrienta",nivel:"1\u00ba",tipo:"Cuento",icono:"\ud83d\udc1b",color:"#16A34A",colorLight:"#DCFCE7",
+  {id:40,titulo:"La peque\u00f1a oruga hambrienta",nivel:"2º",tipo:"Cuento",icono:"\ud83d\udc1b",color:"#16A34A",colorLight:"#DCFCE7",
    intro:"Una oruga come y come todos los d\u00edas. \u00bfQu\u00e9 le estar\u00e1 pasando dentro?",
    texto:`El lunes por la ma\u00f1ana, la oruga se comi\u00f3 una manzana. Pero segu\u00eda teniendo hambre.
 
@@ -908,7 +1207,7 @@ Cuando sali\u00f3... \u00a1era una mariposa de colores!`,
      {tipo:"opcion",pregunta:"\u00bfEn qu\u00e9 se convirti\u00f3 la oruga?",opciones:["En un escarabajo","En una mariposa de colores","En un gusano de seda"],correcta:1},
      {tipo:"abierta",pregunta:"\u00bfPor qu\u00e9 crees que le doli\u00f3 la barriga a la oruga? \u00bfQu\u00e9 podemos aprender de eso?"},
    ]},
-  {id:41,titulo:"La abeja reina",nivel:"2\u00ba",tipo:"Texto informativo",icono:"\ud83c\udf6f",color:"#D97706",colorLight:"#FEF9C3",
+  {id:41,titulo:"La abeja reina",nivel:"2º",tipo:"Texto informativo",icono:"\ud83c\udf6f",color:"#D97706",colorLight:"#FEF9C3",
    intro:"\u00bfC\u00f3mo funciona una colmena? Descubre el incre\u00edble mundo de las abejas.",
    texto:`Una colmena es como una ciudad llena de abejas. Pueden vivir hasta 80.000 abejas en una sola colmena.
 
@@ -927,7 +1226,7 @@ La miel dura para siempre: en tumbas egipcias de hace 3.000 a\u00f1os se ha enco
      {tipo:"opcion",pregunta:"\u00bfCu\u00e1nto dura la miel?",opciones:["Solo un a\u00f1o","Diez a\u00f1os","Para siempre"],correcta:2},
      {tipo:"abierta",pregunta:"\u00bfQu\u00e9 te parece m\u00e1s sorprendente de las abejas? \u00bfPor qu\u00e9?"},
    ]},
-  {id:42,titulo:"El patito diferente",nivel:"1\u00ba",tipo:"Cuento",icono:"\ud83e\udda2",color:"#0891B2",colorLight:"#CFFAFE",
+  {id:42,titulo:"El patito diferente",nivel:"2º",tipo:"Cuento",icono:"\ud83e\udda2",color:"#0891B2",colorLight:"#CFFAFE",
    intro:"Un patito nace diferente a sus hermanos. Todos le hacen sentir raro. Pero llega el d\u00eda en que descubre qui\u00e9n es.",
    texto:`En el nido de mam\u00e1 Pata nacieron cinco patitos iguales, amarillos y peque\u00f1os. Pero el \u00faltimo en salir del huevo era gris, grande y torpe.
 
@@ -952,7 +1251,7 @@ El patito comprendi\u00f3 que siempre hab\u00eda sido un cisne. Solo necesitaba 
      {tipo:"opcion",pregunta:"\u00bfQu\u00e9 aprendemos de este cuento?",opciones:["Que los cisnes son m\u00e1s bonitos que los patos","Que a veces solo necesitamos tiempo para descubrir qui\u00e9nes somos","Que hay que re\u00edrse de los diferentes"],correcta:1},
      {tipo:"abierta",pregunta:"\u00bfAlguna vez te has sentido diferente a los dem\u00e1s? \u00bfC\u00f3mo lo viviste?"},
    ]},
-  {id:43,titulo:"El viaje de una gota de agua",nivel:"2\u00ba",tipo:"Texto informativo",icono:"\u2601\ufe0f",color:"#0284C7",colorLight:"#E0F2FE",
+  {id:43,titulo:"El viaje de una gota de agua",nivel:"2º",tipo:"Texto informativo",icono:"\u2601\ufe0f",color:"#0284C7",colorLight:"#E0F2FE",
    intro:"\u00bfSab\u00edas que el agua siempre est\u00e1 viajando? Sigue el ciclo del agua desde el mar hasta las nubes.",
    texto:`El agua nunca se queda quieta. Siempre est\u00e1 viajando en lo que llamamos el ciclo del agua.
 
@@ -971,7 +1270,7 @@ El agua cae a los r\u00edos, los lagos y el mar, y el ciclo vuelve a empezar. \u
      {tipo:"opcion",pregunta:"\u00bfQu\u00e9 pasa con el agua cuando llega al mar?",opciones:["Se queda all\u00ed para siempre","El ciclo vuelve a empezar","Se convierte en hielo"],correcta:1},
      {tipo:"abierta",pregunta:"\u00bfPor qu\u00e9 crees que es importante no contaminar el agua si siempre vuelve a nosotros?"},
    ]},
-  {id:44,titulo:"El lobo y los tres cerditos",nivel:"1\u00ba",tipo:"Cuento",icono:"\ud83d\udc37",color:"#EC4899",colorLight:"#FCE7F3",
+  {id:44,titulo:"El lobo y los tres cerditos",nivel:"2º",tipo:"Cuento",icono:"\ud83d\udc37",color:"#EC4899",colorLight:"#FCE7F3",
    intro:"Tres cerditos construyen sus casas de materiales distintos. \u00a1Pero el lobo quiere soplar y soplar!",
    texto:`Tres cerditos se fueron a vivir solos al bosque.
 
@@ -996,7 +1295,7 @@ Y el que m\u00e1s hab\u00eda trabajado los hab\u00eda salvado a todos.`,
      {tipo:"opcion",pregunta:"\u00bfQu\u00e9 aprendemos de este cuento?",opciones:["Que soplar sirve para muchas cosas","Que trabajar bien y con esfuerzo da mejores resultados","Que los lobos son peligrosos"],correcta:1},
      {tipo:"abierta",pregunta:"\u00bfCrees que el tercer cerdito hizo bien en construir su casa de ladrillos aunque tard\u00f3 m\u00e1s? \u00bfPor qu\u00e9?"},
    ]},
-  {id:45,titulo:"Mi cuerpo",nivel:"1\u00ba",tipo:"Texto informativo",icono:"\ud83e\udec0",color:"#EF4444",colorLight:"#FEE2E2",
+  {id:45,titulo:"Mi cuerpo",nivel:"2º",tipo:"Texto informativo",icono:"\ud83e\udec0",color:"#EF4444",colorLight:"#FEE2E2",
    intro:"\u00bfCu\u00e1ntos huesos tienes? \u00bfQu\u00e9 hace tu coraz\u00f3n? \u00a1Descubre cosas asombrosas sobre tu propio cuerpo!",
    texto:`El cuerpo humano es incre\u00edble.
 
@@ -1017,7 +1316,7 @@ Los cinco sentidos \u2014vista, o\u00eddo, olfato, gusto y tacto\u2014 nos permi
      {tipo:"opcion",pregunta:"\u00bfCu\u00e1les son los cinco sentidos?",opciones:["Vista, o\u00eddo, tacto, equilibrio y velocidad","Vista, o\u00eddo, olfato, gusto y tacto","Vista, olfato, gusto, memoria y tacto"],correcta:1},
      {tipo:"abierta",pregunta:"\u00bfCu\u00e1l de los sentidos crees que es el m\u00e1s importante para ti? \u00bfPor qu\u00e9?"},
    ]},
-  {id:46,titulo:"El gatito perdido",nivel:"1\u00ba",tipo:"Cuento",icono:"\ud83d\udc31",color:"#6366F1",colorLight:"#E0E7FF",
+  {id:46,titulo:"El gatito perdido",nivel:"2º",tipo:"Cuento",icono:"\ud83d\udc31",color:"#6366F1",colorLight:"#E0E7FF",
    intro:"Nube es un gatito blanco que se ha perdido en el barrio. \u00bfEncontrar\u00e1 el camino a casa?",
    texto:`Nube era un gatito blanco que un d\u00eda se alej\u00f3 demasiado de casa siguiendo una mariposa.
 
@@ -1045,7 +1344,7 @@ Nube ronrone\u00f3 cuando vio a su due\u00f1o. Carmen se despidi\u00f3 del gatit
      {tipo:"opcion",pregunta:"\u00bfC\u00f3mo supo el due\u00f1o que hab\u00edan encontrado a Nube?",opciones:["Lo vio por la calle","Vio el cartel y llam\u00f3","Un vecino se lo dijo"],correcta:1},
      {tipo:"abierta",pregunta:"\u00bfQu\u00e9 har\u00edas t\u00fa si encontraras un animal perdido?"},
    ]},
-  {id:47,titulo:"Un d\u00eda de lluvia",nivel:"1\u00ba",tipo:"Texto",icono:"\ud83c\udf27\ufe0f",color:"#0284C7",colorLight:"#E0F2FE",
+  {id:47,titulo:"Un d\u00eda de lluvia",nivel:"2º",tipo:"Texto",icono:"\ud83c\udf27\ufe0f",color:"#0284C7",colorLight:"#E0F2FE",
    intro:"Hoy llueve mucho y no se puede salir a jugar. \u00bfQu\u00e9 hacen los ni\u00f1os en casa?",
    texto:`Hoy llueve mucho. Las gotas tamborilean en la ventana y los charcos crecen en la calle.
 
@@ -1069,7 +1368,7 @@ La lluvia sigue cayendo. El chocolate caliente huele rico.
      {tipo:"opcion",pregunta:"\u00bfQu\u00e9 quiere hacer Mar\u00eda el d\u00eda siguiente?",opciones:["Ir al parque","Pisar charcos","Ver una pel\u00edcula"],correcta:1},
      {tipo:"abierta",pregunta:"\u00bfQu\u00e9 haces t\u00fa cuando llueve y no puedes salir? Cu\u00e9ntalo."},
    ]},
-  {id:48,titulo:"El loro parlanch\u00edn",nivel:"2\u00ba",tipo:"Cuento",icono:"\ud83e\udd9c",color:"#16A34A",colorLight:"#DCFCE7",
+  {id:48,titulo:"El loro parlanch\u00edn",nivel:"2º",tipo:"Cuento",icono:"\ud83e\udd9c",color:"#16A34A",colorLight:"#DCFCE7",
    intro:"Pico es un loro que repite todo lo que oye. Un d\u00eda repite algo que no deber\u00eda... con consecuencias divertidas.",
    texto:`Pico era un loro verde con cola roja que viv\u00eda en casa de do\u00f1a Concha.
 
@@ -1096,7 +1395,7 @@ Desde ese d\u00eda, do\u00f1a Concha tuvo mucho cuidado con lo que dec\u00eda de
      {tipo:"opcion",pregunta:"\u00bfQu\u00e9 aprendi\u00f3 do\u00f1a Concha?",opciones:["Que los loros son peligrosos","Que hay que tener cuidado con lo que se dice delante del loro","Que Pico era muy inteligente"],correcta:1},
      {tipo:"abierta",pregunta:"\u00bfAlguna vez has repetido algo que no deb\u00edas? \u00bfQu\u00e9 pas\u00f3?"},
    ]},
-  {id:49,titulo:"El cumplea\u00f1os de Pablo",nivel:"1\u00ba",tipo:"Texto",icono:"\ud83c\udf88",color:"#F59E0B",colorLight:"#FEF3C7",
+  {id:49,titulo:"El cumplea\u00f1os de Pablo",nivel:"2º",tipo:"Texto",icono:"\ud83c\udf88",color:"#F59E0B",colorLight:"#FEF3C7",
    intro:"Pablo cumple seis a\u00f1os. \u00bfC\u00f3mo celebra su cumplea\u00f1os con su familia y sus amigos?",
    texto:`Hoy Pablo cumple seis a\u00f1os.
 
@@ -1119,7 +1418,7 @@ Pablo sonri\u00f3. Hab\u00eda sido el mejor d\u00eda del a\u00f1o.`,
      {tipo:"opcion",pregunta:"\u00bfCu\u00e1ntas velas ten\u00eda la tarta?",opciones:["Cinco","Seis","Siete"],correcta:1},
      {tipo:"abierta",pregunta:"\u00bfQu\u00e9 es lo que m\u00e1s te gusta de los cumplea\u00f1os? Cu\u00e9ntalo."},
    ]},
-  {id:50,titulo:"Las estrellas",nivel:"1\u00ba",tipo:"Poema",icono:"\u2b50",color:"#8B5CF6",colorLight:"#EDE9FE",
+  {id:50,titulo:"Las estrellas",nivel:"2º",tipo:"Poema",icono:"\u2b50",color:"#8B5CF6",colorLight:"#EDE9FE",
    intro:"Un poema para contemplar el cielo nocturno y so\u00f1ar con las estrellas.",
    texto:`Las estrellas son faroles
 que alguien olvid\u00f3 apagar,
@@ -1148,7 +1447,7 @@ para guiarnos y para brillar.`,
      {tipo:"opcion",pregunta:"\u00bfPara qu\u00e9 sirven las estrellas al final del poema?",opciones:["Para indicar el tiempo que har\u00e1","Para guiarnos y brillar","Para decirnos la hora"],correcta:1},
      {tipo:"abierta",pregunta:"\u00bfHas mirado alguna vez el cielo estrellado de noche? \u00bfC\u00f3mo te hizo sentir?"},
    ]},
-  {id:201,titulo:"El perro de Tomás",nivel:"1º",tipo:"Texto",icono:"🐕",color:"#F59E0B",colorLight:"#FEF3C7",
+  {id:201,titulo:"El perro de Tomás",nivel:"1º·N3",tipo:"Texto",icono:"🐕",color:"#F59E0B",colorLight:"#FEF3C7",
    intro:"Lee este texto corto sobre el perro de Tomás.",
    texto:`Tomás tiene un perro que se llama Canelo. Canelo es marrón y tiene las orejas muy largas. Por las mañanas, Tomás le da de comer y le pone agua fresca. Luego salen juntos a pasear por el parque. Canelo mueve la cola cuando está contento.`,
    preguntas:[
@@ -1159,7 +1458,7 @@ para guiarnos y para brillar.`,
      {tipo:"opcion",pregunta:"¿Qué hace Canelo cuando está contento?",opciones:["Ladra mucho","Mueve la cola","Se tumba en el suelo"],correcta:1},
      {tipo:"abierta",pregunta:"¿Tienes o te gustaría tener una mascota? ¿Cómo se llamaría?"},
    ]},
-  {id:202,titulo:"El desayuno de Lucía",nivel:"1º",tipo:"Texto",icono:"🥛",color:"#06B6D4",colorLight:"#CFFAFE",
+  {id:202,titulo:"El desayuno de Lucía",nivel:"1º·N3",tipo:"Texto",icono:"🥛",color:"#06B6D4",colorLight:"#CFFAFE",
    intro:"Lee qué desayuna Lucía cada mañana antes de ir al colegio.",
    texto:`Cada mañana, Lucía desayuna con su mamá antes de ir al colegio. Primero bebe un vaso de leche con cacao. Luego come dos tostadas con tomate y aceite. A veces su mamá le pone un poco de zumo de naranja. Cuando termina, se lava los dientes y coge la mochila.`,
    preguntas:[
@@ -1170,7 +1469,7 @@ para guiarnos y para brillar.`,
      {tipo:"opcion",pregunta:"¿Qué le pone a veces su mamá?",opciones:["Un trozo de fruta","Zumo de naranja","Una galleta de chocolate"],correcta:1},
      {tipo:"abierta",pregunta:"¿Qué desayunas tú por las mañanas?"},
    ]},
-  {id:203,titulo:"Mi clase",nivel:"1º",tipo:"Texto",icono:"🏫",color:"#8B5CF6",colorLight:"#EDE9FE",
+  {id:203,titulo:"Mi clase",nivel:"1º·N3",tipo:"Texto",icono:"🏫",color:"#8B5CF6",colorLight:"#EDE9FE",
    intro:"Lee este texto sobre cómo es una clase de primero.",
    texto:`Mi clase tiene veinte alumnos. Hay diez niñas y diez niños. Las mesas son amarillas y las sillas son azules. En la pared hay un mapa de España y muchos dibujos que hemos hecho nosotros. La maestra se llama Carmen y siempre nos saluda con una sonrisa.`,
    preguntas:[
@@ -1181,7 +1480,7 @@ para guiarnos y para brillar.`,
      {tipo:"opcion",pregunta:"¿Cómo saluda la maestra a los alumnos?",opciones:["Con un abrazo","Con una sonrisa","Dando palmadas"],correcta:1},
      {tipo:"abierta",pregunta:"¿Cómo es tu clase? Describe algo que te guste de ella."},
    ]},
-  {id:204,titulo:"El gato y la luna",nivel:"1º",tipo:"Cuento",icono:"🌙",color:"#6366F1",colorLight:"#E0E7FF",
+  {id:204,titulo:"El gato y la luna",nivel:"1º·N3",tipo:"Cuento",icono:"🌙",color:"#6366F1",colorLight:"#E0E7FF",
    intro:"Lee este cuento corto sobre un gato que mira la luna.",
    texto:`Todas las noches, el gato Misi se sube al tejado y mira la luna. La luna es redonda y muy brillante. Misi cree que la luna es una pelota gigante de color blanco. Un día intentó saltar para cogerla, pero no pudo llegar. Se quedó mirándola hasta que se durmió en el tejado.`,
    preguntas:[
@@ -1192,7 +1491,7 @@ para guiarnos y para brillar.`,
      {tipo:"opcion",pregunta:"¿Dónde se quedó dormido Misi?",opciones:["En su cesta","En el sofá","En el tejado"],correcta:2},
      {tipo:"abierta",pregunta:"¿Qué ves tú cuando miras la luna por la noche?"},
    ]},
-  {id:205,titulo:"El árbol del jardín",nivel:"1º",tipo:"Texto",icono:"🌳",color:"#16A34A",colorLight:"#DCFCE7",
+  {id:205,titulo:"El árbol del jardín",nivel:"1º·N3",tipo:"Texto",icono:"🌳",color:"#16A34A",colorLight:"#DCFCE7",
    intro:"Lee este texto sobre el árbol grande del jardín.",
    texto:`En el jardín del colegio hay un árbol muy grande. Sus hojas son verdes en primavera y amarillas en otoño. Muchos pájaros hacen sus nidos entre sus ramas. En verano, los niños juegan a su sombra porque hace mucho calor. El árbol lleva muchos años en el jardín.`,
    preguntas:[
@@ -1203,7 +1502,7 @@ para guiarnos y para brillar.`,
      {tipo:"opcion",pregunta:"¿Cuánto tiempo lleva el árbol en el jardín?",opciones:["Solo un año","Dos o tres años","Muchos años"],correcta:2},
      {tipo:"abierta",pregunta:"¿Hay algún árbol especial cerca de tu casa o colegio? ¿Cómo es?"},
    ]},
-  {id:206,titulo:"La pelota roja",nivel:"1º",tipo:"Cuento",icono:"🔴",color:"#EF4444",colorLight:"#FEE2E2",
+  {id:206,titulo:"La pelota roja",nivel:"1º·N3",tipo:"Cuento",icono:"🔴",color:"#EF4444",colorLight:"#FEE2E2",
    intro:"Lee este cuento corto sobre una pelota que se escapa.",
    texto:`Pablo tiene una pelota roja muy grande. Un día estaba jugando en el patio y la pelota salió rodando por la puerta. La pelota cruzó la calle y se metió en el jardín del vecino. El vecino, el señor Ramón, la recogió y se la devolvió a Pablo con una sonrisa.`,
    preguntas:[
@@ -1214,7 +1513,7 @@ para guiarnos y para brillar.`,
      {tipo:"opcion",pregunta:"¿Qué hizo el vecino con la pelota?",opciones:["Se la quedó","La tiró a la basura","La recogió y se la devolvió a Pablo"],correcta:2},
      {tipo:"abierta",pregunta:"¿Qué harías tú si encontraras algo que no es tuyo?"},
    ]},
-  {id:207,titulo:"La familia de Ana",nivel:"1º",tipo:"Texto",icono:"👨‍👩‍👧",color:"#EC4899",colorLight:"#FCE7F3",
+  {id:207,titulo:"La familia de Ana",nivel:"1º·N3",tipo:"Texto",icono:"👨‍👩‍👧",color:"#EC4899",colorLight:"#FCE7F3",
    intro:"Lee este texto sobre la familia de Ana.",
    texto:`Ana vive con su papá, su mamá y su hermano pequeño que se llama Leo. Leo tiene tres años. Los fines de semana, toda la familia va al parque a pasear. El papá de Ana hace fotos con su móvil y la mamá lleva una merienda con bocadillos y fruta.`,
    preguntas:[
@@ -1225,7 +1524,7 @@ para guiarnos y para brillar.`,
      {tipo:"opcion",pregunta:"¿Qué lleva la mamá de Ana al parque?",opciones:["Una pelota y agua","Una manta y libros","Una merienda con bocadillos y fruta"],correcta:2},
      {tipo:"abierta",pregunta:"¿Qué hace tu familia los fines de semana?"},
    ]},
-  {id:208,titulo:"El caracol",nivel:"1º",tipo:"Texto informativo",icono:"🐌",color:"#84CC16",colorLight:"#ECFCCB",
+  {id:208,titulo:"El caracol",nivel:"1º·N3",tipo:"Texto informativo",icono:"🐌",color:"#84CC16",colorLight:"#ECFCCB",
    intro:"Lee y aprende cosas curiosas sobre el caracol.",
    texto:`El caracol lleva su casa a cuestas. Su casa se llama concha y es dura y en forma de espiral. El caracol va muy despacio. Cuando tiene miedo, mete la cabeza dentro de la concha. Le gusta la tierra mojada y las hojas tiernas. Tiene dos antenas en la cabeza con las que puede ver.`,
    preguntas:[
@@ -1236,7 +1535,7 @@ para guiarnos y para brillar.`,
      {tipo:"opcion",pregunta:"¿Para qué usa el caracol sus antenas?",opciones:["Para oler","Para ver","Para escuchar"],correcta:1},
      {tipo:"abierta",pregunta:"¿Has visto alguna vez un caracol? ¿Dónde estaba?"},
    ]},
-  {id:209,titulo:"Llueve en el recreo",nivel:"1º",tipo:"Texto",icono:"🌧️",color:"#0284C7",colorLight:"#E0F2FE",
+  {id:209,titulo:"Llueve en el recreo",nivel:"1º·N3",tipo:"Texto",icono:"🌧️",color:"#0284C7",colorLight:"#E0F2FE",
    intro:"Lee qué pasa cuando llueve y no se puede salir al recreo.",
    texto:`Hoy llueve mucho y no podemos salir al recreo. La maestra nos deja jugar dentro de la clase. Mario y Elena juegan a las cartas. Sara dibuja un arcoíris. Yo me siento con mi amigo Dani a hacer un puzle de animales. Cuando suena el timbre, recogemos todo y volvemos a trabajar.`,
    preguntas:[
@@ -1247,7 +1546,7 @@ para guiarnos y para brillar.`,
      {tipo:"opcion",pregunta:"¿Qué hacen cuando suena el timbre?",opciones:["Salen corriendo al patio","Recogen todo y vuelven a trabajar","Se ponen el abrigo"],correcta:1},
      {tipo:"abierta",pregunta:"¿Qué haces tú cuando no puedes salir al recreo?"},
    ]},
-  {id:210,titulo:"El ratón de biblioteca",nivel:"1º",tipo:"Cuento",icono:"🐭",color:"#7C3AED",colorLight:"#EDE9FE",
+  {id:210,titulo:"El ratón de biblioteca",nivel:"1º·N3",tipo:"Cuento",icono:"🐭",color:"#7C3AED",colorLight:"#EDE9FE",
    intro:"Lee este cuento cortito sobre un ratón muy especial.",
    texto:`En la biblioteca del colegio vive un ratón llamado Pipo. Pipo no se come los libros, los lee. Cada noche, cuando todos se van, Pipo abre un libro y lee una historia. Por eso sabe muchas cosas: sabe dónde viven los leones, cómo se hace el pan y por qué sale el arcoíris.`,
    preguntas:[
@@ -1258,7 +1557,7 @@ para guiarnos y para brillar.`,
      {tipo:"opcion",pregunta:"¿Por qué sabe tantas cosas Pipo?",opciones:["Porque es muy mayor","Porque tiene un ordenador","Porque lee muchos libros"],correcta:2},
      {tipo:"abierta",pregunta:"Si pudieras saber una cosa gracias a los libros, ¿qué querrías aprender?"},
    ]},
-  {id:211,titulo:"El semáforo",nivel:"1º",tipo:"Texto informativo",icono:"🚦",color:"#EF4444",colorLight:"#FEE2E2",
+  {id:211,titulo:"El semáforo",nivel:"1º·N3",tipo:"Texto informativo",icono:"🚦",color:"#EF4444",colorLight:"#FEE2E2",
    intro:"Lee este texto y aprende para qué sirve el semáforo.",
    texto:`El semáforo tiene tres colores. El rojo significa para: los coches se detienen y los peatones pueden cruzar. El amarillo significa atención: los coches van a parar. El verde significa adelante: los coches pueden pasar y los peatones deben esperar. Siempre hay que mirar el semáforo antes de cruzar la calle.`,
    preguntas:[
@@ -1269,7 +1568,7 @@ para guiarnos y para brillar.`,
      {tipo:"opcion",pregunta:"¿Qué debemos hacer antes de cruzar la calle?",opciones:["Correr muy rápido","Mirar el semáforo","Gritar para avisar a los coches"],correcta:1},
      {tipo:"abierta",pregunta:"¿Qué otras normas de seguridad conoces para cruzar la calle?"},
    ]},
-  {id:212,titulo:"Los colores del cielo",nivel:"1º",tipo:"Texto",icono:"🌈",color:"#8B5CF6",colorLight:"#EDE9FE",
+  {id:212,titulo:"Los colores del cielo",nivel:"1º·N3",tipo:"Texto",icono:"🌈",color:"#8B5CF6",colorLight:"#EDE9FE",
    intro:"Lee este texto sobre los colores que tiene el cielo a lo largo del día.",
    texto:`El cielo cambia de color durante el día. Por la mañana, cuando sale el sol, el cielo se pone rosa y naranja. A mediodía es azul y muy brillante. Por la tarde, cuando el sol se esconde, vuelve a ponerse naranja y morado. De noche el cielo es negro y aparecen las estrellas.`,
    preguntas:[
@@ -1280,7 +1579,7 @@ para guiarnos y para brillar.`,
      {tipo:"opcion",pregunta:"¿Qué aparece en el cielo de noche?",opciones:["La luna solamente","Las estrellas","Las nubes de colores"],correcta:1},
      {tipo:"abierta",pregunta:"¿Cuál es tu momento favorito del día para mirar el cielo? ¿Por qué?"},
    ]},
-  {id:213,titulo:"El pan",nivel:"1º",tipo:"Texto informativo",icono:"🍞",color:"#D97706",colorLight:"#FEF3C7",
+  {id:213,titulo:"El pan",nivel:"1º·N3",tipo:"Texto informativo",icono:"🍞",color:"#D97706",colorLight:"#FEF3C7",
    intro:"Lee y aprende cómo se hace el pan.",
    texto:`El pan se hace con harina, agua, sal y levadura. Primero se mezclan todos los ingredientes y se amasa bien. Luego la masa reposa para que suba. Después se mete en el horno y se cuece con mucho calor. Cuando sale del horno huele muy bien y está caliente y crujiente.`,
    preguntas:[
@@ -1291,7 +1590,7 @@ para guiarnos y para brillar.`,
      {tipo:"opcion",pregunta:"¿Cómo sale el pan del horno?",opciones:["Frío y blando","Caliente y crujiente","Húmedo y esponjoso"],correcta:1},
      {tipo:"abierta",pregunta:"¿Has visto alguna vez cómo se hace el pan? ¿Qué te parece más curioso del proceso?"},
    ]},
-  {id:214,titulo:"Mi juguete favorito",nivel:"1º",tipo:"Texto",icono:"🧸",color:"#F59E0B",colorLight:"#FEF3C7",
+  {id:214,titulo:"Mi juguete favorito",nivel:"1º·N3",tipo:"Texto",icono:"🧸",color:"#F59E0B",colorLight:"#FEF3C7",
    intro:"Lee el texto que ha escrito un niño sobre su juguete favorito.",
    texto:`Mi juguete favorito es un dinosaurio de goma verde que me regaló mi abuela. Se llama Rex. Rex tiene la boca muy grande y los dientes muy afilados. Cuando lo aprieto hace un ruido. Lo llevo a todos los sitios, incluso a dormir. Ya está un poco desgastado, pero sigue siendo mi favorito.`,
    preguntas:[
@@ -1302,7 +1601,7 @@ para guiarnos y para brillar.`,
      {tipo:"opcion",pregunta:"¿Cómo está el dinosaurio ahora?",opciones:["Como nuevo","Un poco desgastado","Roto por la mitad"],correcta:1},
      {tipo:"abierta",pregunta:"¿Cuál es tu juguete favorito? Descríbelo."},
    ]},
-  {id:215,titulo:"El sol y la lluvia",nivel:"1º",tipo:"Texto informativo",icono:"☀️",color:"#F59E0B",colorLight:"#FEF3C7",
+  {id:215,titulo:"El sol y la lluvia",nivel:"1º·N3",tipo:"Texto informativo",icono:"☀️",color:"#F59E0B",colorLight:"#FEF3C7",
    intro:"Lee este texto y aprende qué le hacen el sol y la lluvia a las plantas.",
    texto:`Las plantas necesitan el sol y la lluvia para vivir. El sol les da calor y luz para crecer. La lluvia les da el agua que necesitan para no secarse. Cuando hace mucho sol y no llueve, las plantas se ponen mustias. Cuando llueve y hace sol, las plantas crecen fuertes y sanas.`,
    preguntas:[
@@ -4289,7 +4588,8 @@ function PantallaSelectCiclo({alumno, onSelect, onCerrar}) {
 ═══════════════════════════════════════════ */
 function PantallaBiblioteca({alumno, cicloKey, onSelect, onVolver}) {
   const ciclo = CICLOS[cicloKey];
-  const niveles = [...new Set(ciclo.lecturas.map(l=>l.nivel))];
+  const ORDEN_NIV = ["1º·N1","1º·N2","1º·N3","1º","1º-2º","2º"];
+  const niveles = [...new Set(ciclo.lecturas.map(l=>l.nivel))].sort((a,b)=>{const ia=ORDEN_NIV.indexOf(a),ib=ORDEN_NIV.indexOf(b);return (ia<0?99:ia)-(ib<0?99:ib);});
   const mejores = mejoresPorLectura(alumno);
   const Badge = ({label,color})=>(
     <span style={{background:color+"22",color,fontSize:12,fontWeight:800,padding:"2px 8px",borderRadius:20,border:`1.5px solid ${color}44`}}>{label}</span>
@@ -4309,7 +4609,7 @@ function PantallaBiblioteca({alumno, cicloKey, onSelect, onVolver}) {
           return (
             <div key={nivel} style={{marginBottom:32}}>
               <h3 style={{fontFamily:"'Fredoka One',cursive",fontSize:"clamp(18px,3vw,24px)",color:ciclo.color,marginBottom:16,borderBottom:`3px solid ${ciclo.color}44`,paddingBottom:8}}>
-                {nivel === "5º" ? "📗 Quinto" : nivel === "6º" ? "📘 Sexto" : nivel === "5º-6º" ? "📗📘 Quinto y Sexto" : nivel === "1º" ? "🌱 Primero" : nivel === "2º" ? "🌿 Segundo" : "🌱🌿 Primero y Segundo"}
+                {nivel === "5º" ? "📗 Quinto" : nivel === "6º" ? "📘 Sexto" : nivel === "5º-6º" ? "📗📘 Quinto y Sexto" : nivel === "1º·N1" ? "🌱 1.º · Nivel 1 — 1.er trimestre (sílabas directas, sin trabadas)" : nivel === "1º·N2" ? "🌱 1.º · Nivel 2 — 2.º trimestre (ll, ch, g, j, z, qu, h…)" : nivel === "1º·N3" ? "🌱 1.º · Nivel 3 — 3.er trimestre (textos cortos con trabadas)" : nivel === "1º" ? "🌱 Primero" : nivel === "2º" ? "🌿 Segundo" : "🌱🌿 Primero y Segundo"}
               </h3>
               <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fill,minmax(min(280px,100%),1fr))",gap:14}}>
                 {lects.map(l=>(
@@ -4358,7 +4658,7 @@ function PantallaLectura({lectura, onStart, onBack}) {
             <span style={{fontSize:46}}>{lectura.icono}</span>
             <div>
               <h1 style={{fontFamily:"'Fredoka One',cursive",fontSize:"clamp(20px,4vw,32px)",lineHeight:1.1}}>{lectura.titulo}</h1>
-              <p style={{fontSize:14,opacity:.85,marginTop:4}}>{lectura.tipo} · {lectura.nivel} de Primaria</p>
+              <p style={{fontSize:14,opacity:.85,marginTop:4}}>{lectura.tipo} · {lectura.nivel.startsWith("1º·N") ? "1.º de Primaria · Nivel "+lectura.nivel.slice(-1) : lectura.nivel+" de Primaria"}</p>
             </div>
           </div>
         </div>
@@ -4372,7 +4672,7 @@ function PantallaLectura({lectura, onStart, onBack}) {
             {leyendo ? "⏹️ Detener" : "🔊 Escuchar"}
           </button>
         </div>}
-        <div style={{background:"white",borderRadius:20,padding:"32px",maxWidth:800,margin:"0 auto",boxShadow:"0 4px 20px rgba(0,0,0,0.07)",fontSize:"clamp(17px,2.5vw,21px)",lineHeight:1.9,color:"#1E293B",fontWeight:600,whiteSpace:"pre-line"}}>
+        <div style={{background:"white",borderRadius:20,padding:"32px",maxWidth:800,margin:"0 auto",boxShadow:"0 4px 20px rgba(0,0,0,0.07)",fontSize:lectura.nivel==="1º·N1"?"clamp(28px,5vw,40px)":lectura.nivel==="1º·N2"?"clamp(24px,4vw,32px)":"clamp(17px,2.5vw,21px)",lineHeight:lectura.nivel.startsWith("1º·N")?2.1:1.9,letterSpacing:lectura.nivel==="1º·N1"?"1px":undefined,color:"#1E293B",fontWeight:600,whiteSpace:"pre-line"}}>
           {lectura.texto}
         </div>
       </div>
